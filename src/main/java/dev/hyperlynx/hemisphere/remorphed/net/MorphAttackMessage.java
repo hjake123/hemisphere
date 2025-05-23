@@ -10,20 +10,19 @@ import java.util.UUID;
 import java.util.function.Supplier;
 
 // TO CLIENT
-public record MorphAttackMessage(UUID player_id, boolean force, ResourceLocation anim_id) {
+public record MorphAttackMessage(UUID player_id, ResourceLocation anim_id) {
     public void encoder(FriendlyByteBuf buf) {
         buf.writeUUID(player_id);
-        buf.writeBoolean(force);
         buf.writeResourceLocation(anim_id);
     }
 
     public static MorphAttackMessage decoder(FriendlyByteBuf buf) {
-        return new MorphAttackMessage(buf.readUUID(), buf.readBoolean(), buf.readResourceLocation());
+        return new MorphAttackMessage(buf.readUUID(), buf.readResourceLocation());
     }
 
     public void handler(Supplier<NetworkEvent.Context> context) {
         context.get().enqueueWork(() -> {
-            ClientMorphFunctions.animateAttack(player_id, force, anim_id);
+            ClientMorphFunctions.animateAttack(player_id, anim_id);
         });
         context.get().setPacketHandled(true);
     }

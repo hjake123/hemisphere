@@ -11,7 +11,7 @@ import tocraft.walkers.api.PlayerShape;
 import java.util.UUID;
 
 public class ClientMorphFunctions {
-    public static void animateAttack(UUID player_id_attacking, boolean force, ResourceLocation id) {
+    public static void animateAttack(UUID player_id_attacking, ResourceLocation id) {
         Player player = Minecraft.getInstance().level.getPlayerByUUID(player_id_attacking);
         LivingEntity identity = PlayerShape.getCurrentShape(player);
         if(identity instanceof MorphAttackAnimating animating) {
@@ -20,10 +20,8 @@ public class ClientMorphFunctions {
                 Hemisphere.LOGGER.error("Invalid morph animation anim_id {}", id);
                 return;
             }
-            if(!animation.is_punch() || force || animating.doesLeftClickAttack()){
-                animating.startAttackAnimation(animation);
-                MorphAttackAnimationController.addRunningAttack(animating, animation);
-            }
+            animating.startAttackAnimation(animation);
+            MorphAttackAnimationController.addRunningAttack(animating, animation);
         }
     }
 }

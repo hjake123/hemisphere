@@ -16,9 +16,11 @@ public class ClientHandlers {
     public static void onClientTick(TickEvent.ClientTickEvent event) {
         if (event.phase == TickEvent.Phase.END) { // Only call code once as the tick event is called twice every tick
             MorphAttackAnimationController.tick();
-            for(KeyBinding binding : KeyBinding.BINDINGS) {
-                while(binding.mapping().get().consumeClick()) {
-                    binding.handler().run();
+            for(String mod_id : KeyBinding.BINDINGS.keySet()) {
+                for(KeyBinding binding : KeyBinding.BINDINGS.get(mod_id)) {
+                    while(binding.mapping().get().consumeClick()) {
+                        binding.handler().run();
+                    }
                 }
             }
         }

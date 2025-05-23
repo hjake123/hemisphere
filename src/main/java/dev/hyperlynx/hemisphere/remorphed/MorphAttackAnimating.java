@@ -7,7 +7,4 @@ public interface MorphAttackAnimating {
         anim.run_function().accept(this);
     }
     void resetAttackAnimation();
-    default boolean doesLeftClickAttack() {
-        return true;
-    }
 }

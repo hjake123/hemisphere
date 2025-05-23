@@ -1,28 +1,29 @@
 package dev.hyperlynx.hemisphere.keybind;
 
-import dev.hyperlynx.hemisphere.Hemisphere;
 import net.minecraft.client.KeyMapping;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.javafmlmod.FMLModContainer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
-@Mod.EventBusSubscriber(modid = Hemisphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public record KeyBinding(Supplier<KeyMapping> mapping, Runnable handler) {
-    public static final List<KeyBinding> BINDINGS = new ArrayList<>();
+    public static final Map<String, List<KeyBinding>> BINDINGS = new HashMap<>();
 
-    public KeyBinding add(){
-        BINDINGS.add(this);
+    public KeyBinding add(String mod_id){
+        if(!BINDINGS.containsKey(mod_id)) {
+            BINDINGS.put(mod_id, new ArrayList<>());
+        }
+        BINDINGS.get(mod_id).add(this);
         return this;
     }
 
-    @SubscribeEvent
-    public static void registerKeyMaps(RegisterKeyMappingsEvent event) {
-        for(KeyBinding binding : BINDINGS) {
+    public static void registerKeyMappings(RegisterKeyMappingsEvent event, String mod_id) {
+        for(KeyBinding binding : BINDINGS.get(mod_id)) {
             event.register(binding.mapping().get());
         }
     }

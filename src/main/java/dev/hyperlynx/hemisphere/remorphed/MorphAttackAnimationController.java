@@ -7,12 +7,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.registries.RegistryObject;
 import tocraft.walkers.api.PlayerShape;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MorphAttackAnimationController {
     private static final Map<MorphAttackAnimating, Timer> ATTACK_TIMERS = new HashMap<>();
@@ -43,6 +41,10 @@ public class MorphAttackAnimationController {
         }
     }
 
+    public static void playAttackAnim(UUID player_id, ResourceLocation animation_id) {
+        Hemisphere.CHANNEL.send(PacketDistributor.ALL.noArg(), new MorphAttackMessage(player_id, animation_id));
+    }
+
     public static void handleLeftClick(Level level, Player attacker) {
         if(level.isClientSide()) {
             return;
@@ -55,7 +57,7 @@ public class MorphAttackAnimationController {
         if(punch_anim_id == null) {
             return;
         }
-        Hemisphere.CHANNEL.send(PacketDistributor.ALL.noArg(), new MorphAttackMessage(attacker.getUUID(), false, punch_anim_id));
+        Hemisphere.CHANNEL.send(PacketDistributor.ALL.noArg(), new MorphAttackMessage(attacker.getUUID(), punch_anim_id));
     }
 
     public static void handleRightClick(Level level, Player attacker) {
@@ -70,7 +72,7 @@ public class MorphAttackAnimationController {
         if(interact_anim_id == null) {
             return;
         }
-        Hemisphere.CHANNEL.send(PacketDistributor.ALL.noArg(), new MorphAttackMessage(attacker.getUUID(), false, interact_anim_id));
+        Hemisphere.CHANNEL.send(PacketDistributor.ALL.noArg(), new MorphAttackMessage(attacker.getUUID(), interact_anim_id));
     }
 
     private record Timer (int time, MorphAttackAnimation<?> anim) {}
