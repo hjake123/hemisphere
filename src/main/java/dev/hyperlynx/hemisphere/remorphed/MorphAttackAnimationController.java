@@ -36,8 +36,8 @@ public class MorphAttackAnimationController {
             MorphAttackAnimationController.ATTACK_TIMERS.put(animating, new Timer(remaining_time - 1, timer.anim()));
         }
         for(MorphAttackAnimating animating : finished) {
-            MorphAttackAnimationController.ATTACK_TIMERS.remove(animating);
-            animating.resetAttackAnimation();
+            var timer = MorphAttackAnimationController.ATTACK_TIMERS.remove(animating);
+            animating.resetAttackAnimation(timer.anim());
         }
     }
 
