@@ -12,15 +12,19 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class MorphAttackAnimations {
-    public static final DeferredRegister<MorphAttackAnimation> ANIMATIONS = DeferredRegister.create(Hemisphere.location("power_registry"), Hemisphere.MODID);
-    public static final Supplier<IForgeRegistry<MorphAttackAnimation>> REGISTRY = ANIMATIONS.makeRegistry(RegistryBuilder::new);
+    public static final DeferredRegister<MorphAttackAnimation<?>> ANIMATIONS = DeferredRegister.create(Hemisphere.location("morph_animations"), Hemisphere.MODID);
+    public static final Supplier<IForgeRegistry<MorphAttackAnimation<?>>> REGISTRY = ANIMATIONS.makeRegistry(RegistryBuilder::new);
 
-    public static final Map<EntityType<?>, ResourceLocation> PUNCH_ANIMATION_BY_SHAPE = new HashMap<>();
+    public static DeferredRegister<MorphAttackAnimation<?>> makeDeferredRegister(String mod_id) {
+        return DeferredRegister.create(Hemisphere.location("morph_animations"), mod_id);
+    }
+
+    protected static final Map<EntityType<?>, ResourceLocation> PUNCH_ANIMATION_BY_SHAPE = new HashMap<>();
     public static void registerPunchAnimation(EntityType<?> entity, ResourceLocation anim_id) {
         PUNCH_ANIMATION_BY_SHAPE.put(entity, anim_id);
     }
 
-    public static final Map<EntityType<?>, ResourceLocation> INTERACT_ANIMATION_BY_SHAPE = new HashMap<>();
+    protected static final Map<EntityType<?>, ResourceLocation> INTERACT_ANIMATION_BY_SHAPE = new HashMap<>();
     public static void registerUseAnimation(EntityType<?> entity, ResourceLocation anim_id) {
         INTERACT_ANIMATION_BY_SHAPE.put(entity, anim_id);
     }

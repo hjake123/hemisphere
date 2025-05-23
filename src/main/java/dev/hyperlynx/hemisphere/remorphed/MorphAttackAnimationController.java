@@ -17,28 +17,28 @@ import java.util.Map;
 public class MorphAttackAnimationController {
     private static final Map<MorphAttackAnimating, Timer> ATTACK_TIMERS = new HashMap<>();
 
-    public static void addRunningAttack(MorphAttackAnimating animating, MorphAttackAnimation anim) {
+    public static void addRunningAttack(MorphAttackAnimating animating, MorphAttackAnimation<?> anim) {
         if(!ATTACK_TIMERS.containsKey(animating)) {
             ATTACK_TIMERS.put(animating, new Timer(anim.duration(), anim));
         }
     }
 
     public static void tick() {
-        decrement(ATTACK_TIMERS);
+        decrement();
     }
 
-    private static void decrement(Map<MorphAttackAnimating, Timer> timers) {
+    private static void decrement() {
         List<MorphAttackAnimating> finished = new ArrayList<>();
-        for(MorphAttackAnimating animating : timers.keySet()) {
-            Timer timer = timers.get(animating);
+        for(MorphAttackAnimating animating : MorphAttackAnimationController.ATTACK_TIMERS.keySet()) {
+            Timer timer = MorphAttackAnimationController.ATTACK_TIMERS.get(animating);
             int remaining_time = timer.time();
             if(remaining_time <= 0) {
                 finished.add(animating);
             }
-            timers.put(animating, new Timer(remaining_time - 1, timer.anim()));
+            MorphAttackAnimationController.ATTACK_TIMERS.put(animating, new Timer(remaining_time - 1, timer.anim()));
         }
         for(MorphAttackAnimating animating : finished) {
-            timers.remove(animating);
+            MorphAttackAnimationController.ATTACK_TIMERS.remove(animating);
             animating.resetAttackAnimation();
         }
     }
@@ -73,5 +73,5 @@ public class MorphAttackAnimationController {
         Hemisphere.CHANNEL.send(PacketDistributor.ALL.noArg(), new MorphAttackMessage(attacker.getUUID(), false, interact_anim_id));
     }
 
-    private record Timer (int time, MorphAttackAnimation anim) {}
+    private record Timer (int time, MorphAttackAnimation<?> anim) {}
 }
