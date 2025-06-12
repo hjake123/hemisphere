@@ -1,2 +1,5 @@
-# Possessed Mom
-Possessed Mom for Forge 1.20.1, commissioned via Streavent Studios. This should be private!
+# Hemisphere
+This is a library mod made for my personal use in commissions to integrate GeckoLib animations with Walkers.
+If you have a use for it, please get in touch!
+
+Discord: `hyperlynx`
