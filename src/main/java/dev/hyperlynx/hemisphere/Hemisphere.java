@@ -5,6 +5,7 @@ import dev.hyperlynx.hemisphere.remorphed.MorphAttackAnimations;
 import dev.hyperlynx.hemisphere.remorphed.net.MorphMessages;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -32,7 +33,9 @@ public class Hemisphere {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        MorphMessages.registerMessages(CHANNEL);
+        if(ModList.get().isLoaded("walkers")) {
+            MorphMessages.registerMessages(CHANNEL);
+        }
     }
 
     public static ResourceLocation location(String path) {

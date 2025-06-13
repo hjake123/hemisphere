@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
 ...
-    implementation fg.deobf(jarJar(group: 'dev.hyperlynx', name: 'hemisphere', version: '[1,)'))
+    implementation fg.deobf(jarJar(group: 'dev.hyperlynx', name: 'hemisphere', version: '[1.0,2.0)'))
 ...
 }
 ```
