@@ -85,6 +85,11 @@ MorphAttackAnimations.registerPunchAnimation(ModEntityTypes.YOUR_ENTITY_TYPE.get
 MorphAttackAnimations.registerUseAnimation(ModEntityTypes.YOUR_ENTITY_TYPE.get(), USE.getId());
 ```
 
+You can also play morph attack animations directly using `MorphAttackAnimations::playAttackAnim`, like so:
+```java
+MorphAttackAnimationController.playAttackAnim(player.getUUID(), ModMorphFeatures.OTHER_ATTACK.getId());
+```
+
 ## Keybindings
 Hemisphere also adds a simple way to add and check keybindings. You mostly just have to create KeyBinding instances, call their add function, and add one event handler. Here's an example:
 ```java
