@@ -4,6 +4,7 @@ import dev.hyperlynx.hemisphere.Hemisphere;
 import dev.hyperlynx.hemisphere.keybind.KeyBinding;
 import dev.hyperlynx.hemisphere.remorphed.net.EmptyLeftClickMessage;
 import dev.hyperlynx.hemisphere.remorphed.MorphAttackAnimationController;
+import dev.hyperlynx.hemisphere.remorphed.net.EmptyRightClickMessage;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -29,5 +30,10 @@ public class ClientHandlers {
     @SubscribeEvent
     public static void onEmptyLeftClick(PlayerInteractEvent.LeftClickEmpty event) {
         Hemisphere.CHANNEL.sendToServer(new EmptyLeftClickMessage(event.getEntity().getUUID()));
+    }
+
+    @SubscribeEvent
+    public static void onEmptyRightClick(PlayerInteractEvent.RightClickEmpty event) {
+        Hemisphere.CHANNEL.sendToServer(new EmptyRightClickMessage(event.getEntity().getUUID()));
     }
 }

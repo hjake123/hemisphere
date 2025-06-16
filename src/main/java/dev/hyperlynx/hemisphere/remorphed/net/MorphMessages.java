@@ -19,5 +19,12 @@ public class MorphMessages {
                 EmptyLeftClickMessage::decoder,
                 EmptyLeftClickMessage::handler
         );
+        channel.registerMessage(
+                idx++,
+                EmptyRightClickMessage.class,
+                EmptyRightClickMessage::encoder,
+                EmptyRightClickMessage::decoder,
+                EmptyRightClickMessage::handler
+        );
     }
 }

@@ -19,7 +19,23 @@ public class MorphHandlers {
     }
 
     @SubscribeEvent
-    public static void onPlayerRightClick(PlayerInteractEvent.EntityInteract event) {
+    public static void onPlayerRightClickEntity(PlayerInteractEvent.EntityInteract event) {
+        if(event.getLevel().isClientSide()) {
+            return;
+        }
+        MorphAttackAnimationController.handleRightClick(event.getLevel(), event.getEntity());
+    }
+
+    @SubscribeEvent
+    public static void onPlayerRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        if(event.getLevel().isClientSide()) {
+            return;
+        }
+        MorphAttackAnimationController.handleRightClick(event.getLevel(), event.getEntity());
+    }
+
+    @SubscribeEvent
+    public static void onPlayerRightClickWithItem(PlayerInteractEvent.RightClickItem event) {
         if(event.getLevel().isClientSide()) {
             return;
         }
