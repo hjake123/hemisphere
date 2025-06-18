@@ -119,6 +119,8 @@ public class ModKeyBindings {
 }
 ```
 
+Remember, you **MUST** use `Lazy.of` here! It will not work if you don't!
+
 ## Other
 There are two other classes included under the `util` package.
 `HyperMobEffect` is just MobEffect, but with an accessible constructor.
