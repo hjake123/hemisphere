@@ -53,6 +53,7 @@ public class MorphAttackAnimationController {
         if(identity == null) {
             return;
         }
+        MorphAttackEffects.runPunchEffect(attacker, identity);
         ResourceLocation punch_anim_id = MorphAttackAnimations.PUNCH_ANIMATION_BY_SHAPE.get(identity.getType());
         if(punch_anim_id == null) {
             return;
@@ -68,6 +69,7 @@ public class MorphAttackAnimationController {
         if(identity == null) {
             return;
         }
+        MorphAttackEffects.runInteractEffect(attacker, identity);
         ResourceLocation interact_anim_id = MorphAttackAnimations.INTERACT_ANIMATION_BY_SHAPE.get(identity.getType());
         if(interact_anim_id == null) {
             return;

@@ -1,5 +1,6 @@
 package dev.hyperlynx.hemisphere.remorphed;
 
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -40,5 +41,10 @@ public class MorphHandlers {
             return;
         }
         MorphAttackAnimationController.handleRightClick(event.getLevel(), event.getEntity());
+    }
+
+    @SubscribeEvent
+    public static void onServerTick(TickEvent.ServerTickEvent event) {
+        MorphAttackEffects.tick();
     }
 }
