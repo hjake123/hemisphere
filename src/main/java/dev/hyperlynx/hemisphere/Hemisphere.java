@@ -38,8 +38,9 @@ public class Hemisphere {
         }
     }
 
+    @SuppressWarnings("removal")
     public static ResourceLocation location(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MODID, path);
+        return new ResourceLocation(MODID, path);
     }
 }
 
