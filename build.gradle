@@ -177,6 +177,8 @@ dependencies {
     implementation fg.deobf("dev.tocraft:craftedcore-forge:1.20.1-5.8")
     implementation fg.deobf("curse.maven:woodwalkers-868922:6550550")
     implementation fg.deobf("curse.maven:remorphed-950721:5755676")
+    implementation fg.deobf("curse.maven:sekclib-371078:4602066")
+    implementation fg.deobf("curse.maven:re-skin-342729:5509763")
 
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar

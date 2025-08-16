@@ -1,6 +1,7 @@
 package dev.hyperlynx.hemisphere;
 
 import com.mojang.logging.LogUtils;
+import dev.hyperlynx.hemisphere.command.ModCommands;
 import dev.hyperlynx.hemisphere.remorphed.MorphAttackAnimations;
 import dev.hyperlynx.hemisphere.remorphed.net.MorphMessages;
 import net.minecraft.resources.ResourceLocation;
@@ -30,6 +31,7 @@ public class Hemisphere {
         IEventBus bus = context.getModEventBus();
         bus.addListener(this::commonSetup);
         MorphAttackAnimations.ANIMATIONS.register(bus);
+        ModCommands.COMMAND_ARGUMENTS.register(bus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

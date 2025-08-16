@@ -121,6 +121,16 @@ public class ModKeyBindings {
 
 Remember, you **MUST** use `Lazy.of` here! It will not work if you don't!
 
+## /role_skin
+Hemisphere adds a new command called `/role_skin` which allows players to transform into either creatures (with Walkers) or other skins (with Re:Skin).
+To use it, you just need to register the URL for the skin or the entity type for the morph in common setup, like so:
+```java
+    RoleSkins.registerSkin("SkinFromImgur", "https://i.imgur.com/?????.png");
+    RoleSkins.registerSkin("Entity", ModEntityTypes.YOUR_ENTITY.get());
+```
+
+Note that URL skins will only work if Re:Skin is available, and entity skins will only work if Walkers is available.
+
 ## Other
 There are two other classes included under the `util` package.
 `HyperMobEffect` is just MobEffect, but with an accessible constructor.
