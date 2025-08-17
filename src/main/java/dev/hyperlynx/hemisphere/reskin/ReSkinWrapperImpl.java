@@ -11,4 +11,8 @@ public class ReSkinWrapperImpl implements ReSkinWrapper {
     public void setSkin(Player player, String url) {
         CustomSkinManager.setSkin(player, url);
     }
+
+    public void setModel(Player player, boolean slim) {
+        CustomSkinManager.setModel(player, slim ? "slim" : "default");
+    }
 }

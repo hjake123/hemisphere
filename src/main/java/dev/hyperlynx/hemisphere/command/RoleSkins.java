@@ -9,8 +9,8 @@ import java.util.Map;
 public class RoleSkins {
     public static final Map<String, SkinForm> SKINS = new HashMap<>();
 
-    public static void registerSkin(String name, String url) {
-        SKINS.put(name, new SkinForm(url));
+    public static void registerSkin(String name, String url, boolean slim) {
+        SKINS.put(name, new SkinForm(url, slim));
     }
 
     public static void registerSkin(String name, EntityType<? extends LivingEntity> type) {

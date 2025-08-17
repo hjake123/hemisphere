@@ -8,15 +8,18 @@ import org.jetbrains.annotations.Nullable;
 
 public class SkinForm {
     private final @Nullable String url;
+    private final @Nullable Boolean slim;
     private final @Nullable EntityType<? extends LivingEntity> morph;
 
-    public SkinForm(String url) {
+    public SkinForm(String url, boolean slim) {
         this.url = url;
+        this.slim = slim;
         this.morph = null;
     }
 
     public SkinForm(EntityType<? extends LivingEntity> morph) {
         url = null;
+        slim = null;
         this.morph = morph;
     }
 
@@ -26,6 +29,7 @@ public class SkinForm {
             Integration.reskin().resetSkin(player);
         } else if(url != null) {
             Integration.reskin().setSkin(player, url);
+            Integration.reskin().setModel(player, Boolean.TRUE.equals(slim));
             Integration.walkers().resetShape(player);
         }
     }
