@@ -33,4 +33,9 @@ public class MorphAnimations {
     public static void registerCrouchAnimation(EntityType<?> entity, ResourceLocation anim_id) {
         SHIFT_ANIMATION_BY_SHAPE.put(entity, anim_id);
     }
+
+    protected static final Map<EntityType<?>, ResourceLocation> JUMP_ANIMATION_BY_SHAPE = new HashMap<>();
+    public static void registerJumpAnimation(EntityType<?> entity, ResourceLocation anim_id) {
+        JUMP_ANIMATION_BY_SHAPE.put(entity, anim_id);
+    }
 }

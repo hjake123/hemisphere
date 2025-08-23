@@ -2,6 +2,7 @@ package dev.hyperlynx.hemisphere.remorphed;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -53,6 +54,13 @@ public class MorphHandlers {
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if(event.player instanceof ServerPlayer) {
             MorphAnimationController.updateShiftDown(event.player, event.player.isShiftKeyDown());
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerJump(LivingEvent.LivingJumpEvent event) {
+        if(event.getEntity() instanceof ServerPlayer splayer) {
+            MorphAnimationController.handleJump(splayer);
         }
     }
 }

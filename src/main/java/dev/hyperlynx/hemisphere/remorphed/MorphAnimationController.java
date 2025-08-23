@@ -4,6 +4,7 @@ import dev.hyperlynx.hemisphere.Hemisphere;
 import dev.hyperlynx.hemisphere.remorphed.net.MorphAttackMessage;
 import dev.hyperlynx.hemisphere.remorphed.net.UntrackedMorphAnimationMessage;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -71,4 +72,15 @@ public class MorphAnimationController {
         }
     }
 
+    public static void handleJump(ServerPlayer player) {
+        LivingEntity identity = PlayerShape.getCurrentShape(player);
+        if(identity == null) {
+            return;
+        }
+        ResourceLocation jump_anim_id = MorphAnimations.JUMP_ANIMATION_BY_SHAPE.get(identity.getType());
+        if(jump_anim_id == null) {
+            return;
+        }
+        Hemisphere.CHANNEL.send(PacketDistributor.ALL.noArg(), new MorphAttackMessage(player.getUUID(), jump_anim_id));
+    }
 }
