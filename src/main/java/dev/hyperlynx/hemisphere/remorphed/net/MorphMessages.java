@@ -26,5 +26,12 @@ public class MorphMessages {
                 EmptyRightClickMessage::decoder,
                 EmptyRightClickMessage::handler
         );
+        channel.registerMessage(
+                idx++,
+                UntrackedMorphAnimationMessage.class,
+                UntrackedMorphAnimationMessage::encoder,
+                UntrackedMorphAnimationMessage::decoder,
+                UntrackedMorphAnimationMessage::handler
+        );
     }
 }

@@ -11,11 +11,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class MorphAttackAnimations {
-    public static final DeferredRegister<MorphAttackAnimation<?>> ANIMATIONS = DeferredRegister.create(Hemisphere.location("morph_animations"), Hemisphere.MODID);
-    public static final Supplier<IForgeRegistry<MorphAttackAnimation<?>>> REGISTRY = ANIMATIONS.makeRegistry(RegistryBuilder::new);
+public class MorphAnimations {
+    public static final DeferredRegister<MorphAnimation<?>> ANIMATIONS = DeferredRegister.create(Hemisphere.location("morph_animations"), Hemisphere.MODID);
+    public static final Supplier<IForgeRegistry<MorphAnimation<?>>> REGISTRY = ANIMATIONS.makeRegistry(RegistryBuilder::new);
 
-    public static DeferredRegister<MorphAttackAnimation<?>> makeDeferredRegister(String mod_id) {
+    public static DeferredRegister<MorphAnimation<?>> makeDeferredRegister(String mod_id) {
         return DeferredRegister.create(Hemisphere.location("morph_animations"), mod_id);
     }
 
@@ -27,5 +27,10 @@ public class MorphAttackAnimations {
     protected static final Map<EntityType<?>, ResourceLocation> INTERACT_ANIMATION_BY_SHAPE = new HashMap<>();
     public static void registerUseAnimation(EntityType<?> entity, ResourceLocation anim_id) {
         INTERACT_ANIMATION_BY_SHAPE.put(entity, anim_id);
+    }
+
+    protected static final Map<EntityType<?>, ResourceLocation> SHIFT_ANIMATION_BY_SHAPE = new HashMap<>();
+    public static void registerCrouchAnimation(EntityType<?> entity, ResourceLocation anim_id) {
+        SHIFT_ANIMATION_BY_SHAPE.put(entity, anim_id);
     }
 }

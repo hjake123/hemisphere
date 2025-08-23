@@ -9,18 +9,25 @@ import java.util.UUID;
 import java.util.function.Supplier;
 
 // TO CLIENT
-public record MorphAttackMessage(UUID player_id, ResourceLocation anim_id) {
+public record UntrackedMorphAnimationMessage(UUID player_id, ResourceLocation anim_id, boolean start) {
     public void encoder(FriendlyByteBuf buf) {
         buf.writeUUID(player_id);
         buf.writeResourceLocation(anim_id);
+        buf.writeBoolean(start);
     }
 
-    public static MorphAttackMessage decoder(FriendlyByteBuf buf) {
-        return new MorphAttackMessage(buf.readUUID(), buf.readResourceLocation());
+    public static UntrackedMorphAnimationMessage decoder(FriendlyByteBuf buf) {
+        return new UntrackedMorphAnimationMessage(buf.readUUID(), buf.readResourceLocation(), buf.readBoolean());
     }
 
     public void handler(Supplier<NetworkEvent.Context> context) {
-        context.get().enqueueWork(() -> ClientMorphFunctions.animateAttack(player_id, anim_id));
+        context.get().enqueueWork(() -> {
+            if(start) {
+                ClientMorphFunctions.runAnimation(player_id, anim_id);
+            } else {
+                ClientMorphFunctions.resetAnimation(player_id, anim_id);
+            }
+        });
         context.get().setPacketHandled(true);
     }
 

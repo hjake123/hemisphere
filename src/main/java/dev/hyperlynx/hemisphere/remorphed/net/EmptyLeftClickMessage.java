@@ -1,6 +1,6 @@
 package dev.hyperlynx.hemisphere.remorphed.net;
 
-import dev.hyperlynx.hemisphere.remorphed.MorphAttackAnimationController;
+import dev.hyperlynx.hemisphere.remorphed.MorphAnimationController;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -18,9 +18,7 @@ public record EmptyLeftClickMessage(UUID player_id) {
     }
 
     public void handler(Supplier<NetworkEvent.Context> context) {
-        context.get().enqueueWork(() -> {
-            MorphAttackAnimationController.handleLeftClick(context.get().getSender().level(), context.get().getSender());
-        });
+        context.get().enqueueWork(() -> MorphAnimationController.handleLeftClick(context.get().getSender().level(), context.get().getSender()));
         context.get().setPacketHandled(true);
     }
 

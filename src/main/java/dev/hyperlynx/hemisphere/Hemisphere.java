@@ -2,7 +2,7 @@ package dev.hyperlynx.hemisphere;
 
 import com.mojang.logging.LogUtils;
 import dev.hyperlynx.hemisphere.command.ModCommands;
-import dev.hyperlynx.hemisphere.remorphed.MorphAttackAnimations;
+import dev.hyperlynx.hemisphere.remorphed.MorphAnimations;
 import dev.hyperlynx.hemisphere.remorphed.net.MorphMessages;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -30,7 +30,7 @@ public class Hemisphere {
     public Hemisphere(FMLJavaModLoadingContext context) {
         IEventBus bus = context.getModEventBus();
         bus.addListener(this::commonSetup);
-        MorphAttackAnimations.ANIMATIONS.register(bus);
+        MorphAnimations.ANIMATIONS.register(bus);
         ModCommands.COMMAND_ARGUMENTS.register(bus);
     }
 
