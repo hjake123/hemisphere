@@ -55,6 +55,7 @@ public class MorphHandlers {
         if(event.player instanceof ServerPlayer) {
             MorphAnimationController.updateShiftDown(event.player, event.player.isShiftKeyDown());
             MorphAnimationController.updateSwimming(event.player, event.player.isSwimming());
+            MorphAnimationController.updateFlying(event.player, event.player.getAbilities().flying);
         }
     }
 

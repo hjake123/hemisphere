@@ -94,4 +94,9 @@ public class MorphAnimationController {
     public static void updateSwimming(Player player, boolean swimming) {
         updateToggleState(WERE_SWIMMING, MorphAnimations.SWIM_ANIMATION_BY_SHAPE::get, player, swimming);
     }
+
+    private static final Map<UUID, Boolean> WERE_FLYING = new HashMap<>();
+    public static void updateFlying(Player player, boolean swimming) {
+        updateToggleState(WERE_FLYING, MorphAnimations.FLY_ANIMATION_BY_SHAPE::get, player, swimming);
+    }
 }
