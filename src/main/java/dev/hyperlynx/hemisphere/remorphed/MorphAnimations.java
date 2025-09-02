@@ -38,4 +38,9 @@ public class MorphAnimations {
     public static void registerJumpAnimation(EntityType<?> entity, ResourceLocation anim_id) {
         JUMP_ANIMATION_BY_SHAPE.put(entity, anim_id);
     }
+
+    protected static final Map<EntityType<?>, ResourceLocation> SWIM_ANIMATION_BY_SHAPE = new HashMap<>();
+    public static void registerSwimAnimation(EntityType<?> entity, ResourceLocation anim_id) {
+        SWIM_ANIMATION_BY_SHAPE.put(entity, anim_id);
+    }
 }
