@@ -153,6 +153,11 @@ repositories {
     }
 
     maven { url "https://maven.shedaniel.me/" }
+
+    maven {
+        name "architectury maven"
+        url "https://maven.architectury.dev/"
+    }
 }
 
 java {
@@ -173,12 +178,14 @@ dependencies {
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
     // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 
-    implementation(fg.deobf("me.shedaniel.cloth:cloth-config-forge:ABC"))
-    implementation fg.deobf("dev.tocraft:craftedcore-forge:1.20.1-5.8")
-    implementation fg.deobf("curse.maven:woodwalkers-868922:6550550")
-    implementation fg.deobf("curse.maven:remorphed-950721:5755676")
-    implementation fg.deobf("curse.maven:sekclib-371078:4602066")
-    implementation fg.deobf("curse.maven:re-skin-342729:5509763")
+//    implementation(fg.deobf("me.shedaniel.cloth:cloth-config-forge:ABC"))
+//    implementation fg.deobf("dev.tocraft:craftedcore-forge:1.20.1-5.8")
+//    implementation fg.deobf("curse.maven:woodwalkers-868922:6550550")
+//    implementation fg.deobf("curse.maven:remorphed-950721:5755676")
+    implementation fg.deobf("curse.maven:sekclib-371078:4343632")
+    implementation fg.deobf("curse.maven:re-skin-342729:4354459")
+    implementation fg.deobf("curse.maven:identity-391390:4399470")
+    implementation fg.deobf("dev.architectury:architectury-forge:6.6.92")
 
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar

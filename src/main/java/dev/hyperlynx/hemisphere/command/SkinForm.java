@@ -25,12 +25,12 @@ public class SkinForm {
 
     public void apply(ServerPlayer player) {
         if(morph != null) {
-            Integration.walkers().setShape(player, morph);
+            Integration.morph().setShape(player, morph);
             Integration.reskin().resetSkin(player);
         } else if(url != null) {
             Integration.reskin().setSkin(player, url);
             Integration.reskin().setModel(player, Boolean.TRUE.equals(slim));
-            Integration.walkers().resetShape(player);
+            Integration.morph().resetShape(player);
         }
     }
 }

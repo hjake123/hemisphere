@@ -3,13 +3,13 @@ package dev.hyperlynx.hemisphere.remorphed;
 import dev.hyperlynx.hemisphere.Hemisphere;
 import dev.hyperlynx.hemisphere.remorphed.net.MorphAttackMessage;
 import dev.hyperlynx.hemisphere.remorphed.net.UntrackedMorphAnimationMessage;
+import dev.hyperlynx.hemisphere.util.Integration;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PacketDistributor;
-import tocraft.walkers.api.PlayerShape;
 
 import java.util.*;
 
@@ -22,7 +22,7 @@ public class MorphAnimationController {
         if(level.isClientSide()) {
             return;
         }
-        LivingEntity identity = PlayerShape.getCurrentShape(attacker);
+        LivingEntity identity = Integration.morph().getShape(attacker);
         if(identity == null) {
             return;
         }
@@ -38,7 +38,7 @@ public class MorphAnimationController {
         if(level.isClientSide()) {
             return;
         }
-        LivingEntity identity = PlayerShape.getCurrentShape(attacker);
+        LivingEntity identity = Integration.morph().getShape(attacker);
         if(identity == null) {
             return;
         }
@@ -52,7 +52,7 @@ public class MorphAnimationController {
 
     private static final Map<UUID, Boolean> WERE_HOLDING_SHIFT = new HashMap<>();
     public static void updateShiftDown(Player player, boolean holding_shift_key) {
-        LivingEntity identity = PlayerShape.getCurrentShape(player);
+        LivingEntity identity = Integration.morph().getShape(player);
         if(identity == null) {
             return;
         }
@@ -73,7 +73,7 @@ public class MorphAnimationController {
     }
 
     public static void handleJump(ServerPlayer player) {
-        LivingEntity identity = PlayerShape.getCurrentShape(player);
+        LivingEntity identity = Integration.morph().getShape(player);
         if(identity == null) {
             return;
         }

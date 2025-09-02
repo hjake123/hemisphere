@@ -2,11 +2,11 @@ package dev.hyperlynx.hemisphere.remorphed.client;
 
 import dev.hyperlynx.hemisphere.Hemisphere;
 import dev.hyperlynx.hemisphere.remorphed.*;
+import dev.hyperlynx.hemisphere.util.Integration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import tocraft.walkers.api.PlayerShape;
 
 import java.util.UUID;
 import java.util.function.BiConsumer;
@@ -33,7 +33,7 @@ public class ClientMorphFunctions {
         if(player == null) {
             return;
         }
-        LivingEntity identity = PlayerShape.getCurrentShape(player);
+        LivingEntity identity = Integration.morph().getShape(player);
         if(identity instanceof MorphAnimating animating) {
             var animation = MorphAnimations.REGISTRY.get().getValue(anim_id);
             if(animation == null) {

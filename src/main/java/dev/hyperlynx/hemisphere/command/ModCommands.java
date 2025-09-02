@@ -52,7 +52,7 @@ public class ModCommands {
     }
 
     private static int removeSkin(ServerPlayer target) {
-        Integration.walkers().resetShape(target);
+        Integration.morph().resetShape(target);
         Integration.reskin().resetSkin(target);
         return 1;
     }

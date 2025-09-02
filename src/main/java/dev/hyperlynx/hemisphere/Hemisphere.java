@@ -35,7 +35,7 @@ public class Hemisphere {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        if(ModList.get().isLoaded("walkers")) {
+        if(ModList.get().isLoaded("identity")) {
             MorphMessages.registerMessages(CHANNEL);
         }
     }

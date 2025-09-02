@@ -1,17 +1,17 @@
 package dev.hyperlynx.hemisphere.util;
 
-import dev.hyperlynx.hemisphere.remorphed.WalkersWrapper;
-import dev.hyperlynx.hemisphere.remorphed.WalkersWrapperImpl;
+import dev.hyperlynx.hemisphere.remorphed.MorphModWrapper;
+import dev.hyperlynx.hemisphere.remorphed.MorphModWrapperImpl;
 import dev.hyperlynx.hemisphere.reskin.ReSkinWrapper;
 import dev.hyperlynx.hemisphere.reskin.ReSkinWrapperImpl;
 import net.minecraftforge.fml.ModList;
 
 public class Integration {
-    public static WalkersWrapper walkers() {
-        if(ModList.get().isLoaded("walkers")) {
-            return new WalkersWrapperImpl();
+    public static MorphModWrapper morph() {
+        if(ModList.get().isLoaded("identity")) {
+            return new MorphModWrapperImpl();
         }
-        return new WalkersWrapper.Stub();
+        return new MorphModWrapper.Stub();
     }
 
     public static ReSkinWrapper reskin() {
