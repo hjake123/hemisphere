@@ -29,13 +29,13 @@ To add an animation for a custom entity to use while a player is morphed into it
 
 1. Create a deferred register for your animations, like this:
 ```java
-public static final DeferredRegister<MorphAttackAnimation<?>> MORPH_ATTACK_ANIMATIONS = MorphAttackAnimations.makeDeferredRegister("your_modid");
+public static final DeferredRegister<MorphAnimation<?>> MORPH_ANIMATIONS = MorphAnimations.makeDeferredRegister("your_modid");
 ```
 
-2. Register a MorphAttackAnimation<YourEntity>, where YourEntity is the entity you're animating:
+2. Register a MorphAnimation<YourEntity>, where YourEntity is the entity you're animating:
 ```java
-public static final RegistryObject<MorphAttackAnimation<YourEntity>> PUNCH = MORPH_ATTACK_ANIMATIONS.register("punch", () ->
-            new MorphAttackAnimation<>(
+public static final RegistryObject<MorphAnimation<YourEntity>> PUNCH = MORPH_ANIMATIONS.register("punch", () ->
+            new MorphAnimation<>(
                     12, // How many ticks does it take for the animation to complete?
                     (mob) -> mob.setPunching(true), // A lambda to run to trigger the animation to start
                     (mob) -> mob.setPunching(false) // A lambda to run to trigger the animation to end
@@ -81,13 +81,13 @@ public static final RegistryObject<MorphAttackAnimation<YourEntity>> PUNCH = MOR
 4. Register your punch and right click animations during FMLCommonSetup
 Each mob may have one punch and one use (right click) animation assigned to it. This can be done at any time, but to avoid confusion I'd recommend doing during your FMLCommonSetup event handler.
 ```java
-MorphAttackAnimations.registerPunchAnimation(ModEntityTypes.YOUR_ENTITY_TYPE.get(), PUNCH.getId());
-MorphAttackAnimations.registerUseAnimation(ModEntityTypes.YOUR_ENTITY_TYPE.get(), USE.getId());
+MorphAnimations.registerPunchAnimation(ModEntityTypes.YOUR_ENTITY_TYPE.get(), PUNCH.getId());
+MorphAnimations.registerUseAnimation(ModEntityTypes.YOUR_ENTITY_TYPE.get(), USE.getId());
 ```
 
 You can also play morph attack animations directly using `MorphAttackAnimations::playAttackAnim`, like so:
 ```java
-MorphAttackAnimationController.playAttackAnim(player.getUUID(), ModMorphFeatures.OTHER_ATTACK.getId());
+MorphAnimationController.playAttackAnim(player.getUUID(), ModMorphFeatures.OTHER_ATTACK.getId());
 ```
 
 ## Keybindings
