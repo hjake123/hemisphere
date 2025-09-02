@@ -18,7 +18,7 @@ public class MorphHandlers {
 
     @SubscribeEvent
     public static void onEntityHit(AttackEntityEvent event) {
-        MorphAnimationController.handleLeftClick(event.getEntity().level(), event.getEntity());
+        MorphAnimationController.handleLeftClick(event.getEntity().level, event.getEntity());
     }
 
     @SubscribeEvent

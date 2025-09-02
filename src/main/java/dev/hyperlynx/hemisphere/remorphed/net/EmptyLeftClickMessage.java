@@ -18,7 +18,7 @@ public record EmptyLeftClickMessage(UUID player_id) {
     }
 
     public void handler(Supplier<NetworkEvent.Context> context) {
-        context.get().enqueueWork(() -> MorphAnimationController.handleLeftClick(context.get().getSender().level(), context.get().getSender()));
+        context.get().enqueueWork(() -> MorphAnimationController.handleLeftClick(context.get().getSender().level, context.get().getSender()));
         context.get().setPacketHandled(true);
     }
 
