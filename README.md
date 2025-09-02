@@ -46,7 +46,7 @@ public static final RegistryObject<MorphAnimation<YourEntity>> PUNCH = MORPH_ANI
 ```java
     protected static final RawAnimation PUNCH_ANIM = RawAnimation.begin().thenPlay("attack");
 
-    protected static final EntityDataAccessor<Boolean> PUNCHING = SynchedEntityData.defineId(MutantMom.class, EntityDataSerializers.BOOLEAN);
+    protected static final EntityDataAccessor<Boolean> PUNCHING = SynchedEntityData.defineId(ExampleEntity.class, EntityDataSerializers.BOOLEAN);
 
     @Override
     protected void defineSynchedData() {
@@ -69,7 +69,7 @@ public static final RegistryObject<MorphAnimation<YourEntity>> PUNCH = MORPH_ANI
         // Add other controllers like walking as well
     }
 
-    private PlayState attackAnimationController(AnimationState<MutantMom> state) {
+    private PlayState attackAnimationController(AnimationState<ExampleEntity> state) {
         if (this.isPunching()) {
             return state.setAndContinue(PUNCH_ANIM);
         }
