@@ -53,9 +53,7 @@ public class MorphHandlers {
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if(event.player instanceof ServerPlayer) {
-            MorphAnimationController.updateShiftDown(event.player, event.player.isShiftKeyDown());
-            MorphAnimationController.updateSwimming(event.player, event.player.isSwimming());
-            MorphAnimationController.updateFlying(event.player, event.player.getAbilities().flying);
+            ToggleAnimationTypes.tick(event.player);
         }
     }
 

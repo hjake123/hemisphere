@@ -29,23 +29,20 @@ public class MorphAnimations {
         INTERACT_ANIMATION_BY_SHAPE.put(entity, anim_id);
     }
 
-    protected static final Map<EntityType<?>, ResourceLocation> SHIFT_ANIMATION_BY_SHAPE = new HashMap<>();
-    public static void registerCrouchAnimation(EntityType<?> entity, ResourceLocation anim_id) {
-        SHIFT_ANIMATION_BY_SHAPE.put(entity, anim_id);
-    }
-
     protected static final Map<EntityType<?>, ResourceLocation> JUMP_ANIMATION_BY_SHAPE = new HashMap<>();
     public static void registerJumpAnimation(EntityType<?> entity, ResourceLocation anim_id) {
         JUMP_ANIMATION_BY_SHAPE.put(entity, anim_id);
     }
 
-    protected static final Map<EntityType<?>, ResourceLocation> SWIM_ANIMATION_BY_SHAPE = new HashMap<>();
-    public static void registerSwimAnimation(EntityType<?> entity, ResourceLocation anim_id) {
-        SWIM_ANIMATION_BY_SHAPE.put(entity, anim_id);
+    public static void registerCrouchAnimation(EntityType<?> entity, ResourceLocation anim_id) {
+        ToggleAnimationTypes.SHIFT.get().registerAnimation(entity, anim_id);
     }
 
-    protected static final Map<EntityType<?>, ResourceLocation> FLY_ANIMATION_BY_SHAPE = new HashMap<>();
+    public static void registerSwimAnimation(EntityType<?> entity, ResourceLocation anim_id) {
+        ToggleAnimationTypes.SWIMMING.get().registerAnimation(entity, anim_id);
+    }
+
     public static void registerFlyingAnimation(EntityType<?> entity, ResourceLocation anim_id) {
-        FLY_ANIMATION_BY_SHAPE.put(entity, anim_id);
+        ToggleAnimationTypes.FLYING.get().registerAnimation(entity, anim_id);
     }
 }

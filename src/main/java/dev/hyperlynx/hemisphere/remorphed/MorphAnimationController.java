@@ -64,7 +64,7 @@ public class MorphAnimationController {
         Hemisphere.CHANNEL.send(PacketDistributor.ALL.noArg(), new MorphAttackMessage(player.getUUID(), jump_anim_id));
     }
 
-    private static void updateToggleState(Map<UUID, Boolean> state_map, Function<EntityType<?>, ResourceLocation> transition_lookup, Player player, boolean should_run) {
+    public static void updateToggleState(Map<UUID, Boolean> state_map, Function<EntityType<?>, ResourceLocation> transition_lookup, Player player, boolean should_run) {
         LivingEntity identity = PlayerShape.getCurrentShape(player);
         if(identity == null) {
             return;
@@ -83,20 +83,5 @@ public class MorphAnimationController {
                         new UntrackedMorphAnimationMessage(player.getUUID(), shift_animation_id, false));
             }
         }
-    }
-
-    private static final Map<UUID, Boolean> WERE_HOLDING_SHIFT = new HashMap<>();
-    public static void updateShiftDown(Player player, boolean holding_shift_key) {
-        updateToggleState(WERE_HOLDING_SHIFT, MorphAnimations.SHIFT_ANIMATION_BY_SHAPE::get, player, holding_shift_key);
-    }
-
-    private static final Map<UUID, Boolean> WERE_SWIMMING = new HashMap<>();
-    public static void updateSwimming(Player player, boolean swimming) {
-        updateToggleState(WERE_SWIMMING, MorphAnimations.SWIM_ANIMATION_BY_SHAPE::get, player, swimming);
-    }
-
-    private static final Map<UUID, Boolean> WERE_FLYING = new HashMap<>();
-    public static void updateFlying(Player player, boolean swimming) {
-        updateToggleState(WERE_FLYING, MorphAnimations.FLY_ANIMATION_BY_SHAPE::get, player, swimming);
     }
 }
