@@ -81,6 +81,8 @@ public static final RegistryObject<MorphAnimation<YourEntity>> PUNCH = MORPH_ANI
 4. Register your automatic animations. Each mob may have animations registered for a variety of cases, like punching, right clicking, jumping, or crouching. This can be done at any time, but to avoid confusion I'd recommend doing during your `FMLCommonSetup` event handler.
 ```java
 MorphAnimations.registerPunchAnimation(ModEntityTypes.YOUR_ENTITY_TYPE.get(), PUNCH.getId());
+
+// Optionally, register others too -- set them up like you did PUNCH.
 MorphAnimations.registerUseAnimation(ModEntityTypes.YOUR_ENTITY_TYPE.get(), USE.getId());
 MorphAnimations.registerJumpAnimation(ModEntityTypes.YOUR_ENTITY_TYPE.get(), JUMP.getId());
 MorphAnimations.registerSwimAnimation(ModEntityTypes.YOUR_ENTITY_TYPE.get(), SWIM.getId());
