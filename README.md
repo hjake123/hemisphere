@@ -1,11 +1,11 @@
 # Hemisphere
-This is a library mod made for use in commissions to integrate GeckoLib animations with Walkers, among other repeated tasks.
+This is a library mod made for use in commissions to integrate GeckoLib animations with Walkers, among other repeated tasks. It is for Forge 1.20.1 only.
 
 # Setup
 This mod can be built using gradle, and is intended to be used with the JarJar dependency system.
-To get started, clone the repo and build using the `publishToMavenLocal` task. In your mod, include this line in your build.gradle:
+To get started, clone the repo and build using the `publishToMavenLocal` task.
 
-Then, in your `build.gradle`, add these lines:
+Then, in your mod's `build.gradle`, add these lines:
 ```
 repositories {
 ...
@@ -32,7 +32,7 @@ To add an animation for a custom entity to use while a player is morphed into it
 public static final DeferredRegister<MorphAnimation<?>> MORPH_ANIMATIONS = MorphAnimations.makeDeferredRegister("your_modid");
 ```
 
-2. Register a MorphAnimation<YourEntity>, where YourEntity is the entity you're animating:
+2. Register some `MorphAnimation<YourEntity>`s, where YourEntity is the entity you're animating:
 ```java
 public static final RegistryObject<MorphAnimation<YourEntity>> PUNCH = MORPH_ANIMATIONS.register("punch", () ->
             new MorphAnimation<>(
@@ -42,7 +42,7 @@ public static final RegistryObject<MorphAnimation<YourEntity>> PUNCH = MORPH_ANI
             ));
 ```
 
-3. Set up your entity to update and check an EntityDataAccessor to decide its animation state. These DO exist on entities a player is "controlling" while morphed into them:
+3. Set up your entity to update and check an `EntityDataAccessor` to decide its animation state. These DO exist on entities a player is "controlling" while morphed into them:
 ```java
     protected static final RawAnimation PUNCH_ANIM = RawAnimation.begin().thenPlay("attack");
 
@@ -78,11 +78,15 @@ public static final RegistryObject<MorphAnimation<YourEntity>> PUNCH = MORPH_ANI
     }
 ```
 
-4. Register your punch and right click animations during FMLCommonSetup
-Each mob may have one punch and one use (right click) animation assigned to it. This can be done at any time, but to avoid confusion I'd recommend doing during your FMLCommonSetup event handler.
+4. Register your automatic animations. Each mob may have animations registered for a variety of cases, like punching, right clicking, jumping, or crouching. This can be done at any time, but to avoid confusion I'd recommend doing during your `FMLCommonSetup` event handler.
 ```java
 MorphAnimations.registerPunchAnimation(ModEntityTypes.YOUR_ENTITY_TYPE.get(), PUNCH.getId());
 MorphAnimations.registerUseAnimation(ModEntityTypes.YOUR_ENTITY_TYPE.get(), USE.getId());
+MorphAnimations.registerJumpAnimation(ModEntityTypes.YOUR_ENTITY_TYPE.get(), JUMP.getId());
+MorphAnimations.registerSwimAnimation(ModEntityTypes.YOUR_ENTITY_TYPE.get(), SWIM.getId());
+MorphAnimations.registerFlyingAnimation(ModEntityTypes.YOUR_ENTITY_TYPE.get(), FLY.getId());
+MorphAnimations.registerCrouchAnimation(ModEntityTypes.YOUR_ENTITY_TYPE.get(), CROUCH.getId());
+
 ```
 
 You can also play morph attack animations directly using `MorphAttackAnimations::playAttackAnim`, like so:
