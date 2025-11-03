@@ -53,7 +53,7 @@ public class MorphHandlers {
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if(event.player instanceof ServerPlayer) {
-            MorphAnimationController.updateShiftDown(event.player, event.player.isShiftKeyDown());
+            ToggleAnimationTypes.tick(event.player);
         }
     }
 
