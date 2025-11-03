@@ -1,7 +1,7 @@
 package dev.hyperlynx.hemisphere.command;
 
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 
 import java.util.HashMap;
 import java.util.Map;

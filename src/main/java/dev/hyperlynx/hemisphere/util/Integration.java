@@ -8,16 +8,13 @@ import net.minecraftforge.fml.ModList;
 
 public class Integration {
     public static MorphModWrapper morph() {
-        if(ModList.get().isLoaded("identity")) {
+        if(ModList.get().isLoaded("morph")) {
             return new MorphModWrapperImpl();
         }
         return new MorphModWrapper.Stub();
     }
 
     public static ReSkinWrapper reskin() {
-        if(ModList.get().isLoaded("reskin")) {
-            return new ReSkinWrapperImpl();
-        }
         return new ReSkinWrapper.Stub();
     }
 }

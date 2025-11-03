@@ -1,8 +1,8 @@
 package dev.hyperlynx.hemisphere.remorphed;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,9 +12,9 @@ import java.util.function.Function;
 public class ToggleAnimationType {
     private final Map<UUID, Boolean> toggle_states = new HashMap<>();
     private final Map<EntityType<?>, ResourceLocation> animation_by_shape = new HashMap<>();
-    private final Function<Player, Boolean> check_function;
+    private final Function<PlayerEntity, Boolean> check_function;
 
-    public ToggleAnimationType(Function<Player, Boolean> checkFunction) {
+    public ToggleAnimationType(Function<PlayerEntity, Boolean> checkFunction) {
         check_function = checkFunction;
     }
 
@@ -22,7 +22,7 @@ public class ToggleAnimationType {
         animation_by_shape.put(type, anim_id);
     }
 
-    public void tick(Player player) {
+    public void tick(PlayerEntity player) {
         MorphAnimationController.updateToggleState(toggle_states, animation_by_shape::get, player, check_function.apply(player));
     }
 }

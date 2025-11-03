@@ -1,7 +1,7 @@
 package dev.hyperlynx.hemisphere.client;
 
 import dev.hyperlynx.hemisphere.Hemisphere;
-import dev.hyperlynx.hemisphere.keybind.KeyBinding;
+import dev.hyperlynx.hemisphere.keybind.KeyBind;
 import dev.hyperlynx.hemisphere.remorphed.client.ClientMorphAttackAnimationController;
 import dev.hyperlynx.hemisphere.remorphed.net.EmptyLeftClickMessage;
 import dev.hyperlynx.hemisphere.remorphed.net.EmptyRightClickMessage;
@@ -17,10 +17,10 @@ public class ClientHandlers {
     public static void onClientTick(TickEvent.ClientTickEvent event) {
         if (event.phase == TickEvent.Phase.END) { // Only call code once as the tick event is called twice every tick
             ClientMorphAttackAnimationController.tick();
-            for(String mod_id : KeyBinding.BINDINGS.keySet()) {
-                for(KeyBinding binding : KeyBinding.BINDINGS.get(mod_id)) {
-                    while(binding.mapping().get().consumeClick()) {
-                        binding.handler().run();
+            for(String mod_id : KeyBind.BINDINGS.keySet()) {
+                for(KeyBind binding : KeyBind.BINDINGS.get(mod_id)) {
+                    while(binding.key.get().consumeClick()) {
+                        binding.handler.run();
                     }
                 }
             }

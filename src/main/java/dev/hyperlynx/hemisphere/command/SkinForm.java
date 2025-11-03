@@ -1,10 +1,11 @@
 package dev.hyperlynx.hemisphere.command;
 
 import dev.hyperlynx.hemisphere.util.Integration;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+
+import javax.annotation.Nullable;
 
 public class SkinForm {
     private final @Nullable String url;
@@ -23,7 +24,7 @@ public class SkinForm {
         this.morph = morph;
     }
 
-    public void apply(ServerPlayer player) {
+    public void apply(ServerPlayerEntity player) {
         if(morph != null) {
             Integration.morph().setShape(player, morph);
             Integration.reskin().resetSkin(player);

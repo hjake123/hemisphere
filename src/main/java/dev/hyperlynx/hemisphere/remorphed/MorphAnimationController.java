@@ -4,6 +4,7 @@ import dev.hyperlynx.hemisphere.Hemisphere;
 import dev.hyperlynx.hemisphere.remorphed.net.MorphAttackMessage;
 import dev.hyperlynx.hemisphere.remorphed.net.UntrackedMorphAnimationMessage;
 import dev.hyperlynx.hemisphere.util.Integration;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
@@ -73,7 +74,7 @@ public class MorphAnimationController {
         }
     }
 
-    public static void handleJump(ServerPlayer player) {
+    public static void handleJump(ServerPlayerEntity player) {
         LivingEntity identity = Integration.morph().getShape(player);
         if(identity == null) {
             return;

@@ -1,22 +1,23 @@
 package dev.hyperlynx.hemisphere.remorphed;
+import me.ichun.mods.morph.api.MorphApi;
+import me.ichun.mods.morph.common.morph.save.PlayerMorphData;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 
-import draylar.identity.api.PlayerIdentity;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 
 public class MorphModWrapperImpl implements MorphModWrapper {
-    public void setShape(ServerPlayer player, EntityType<? extends LivingEntity> shape) {
-        PlayerIdentity.updateIdentity(player, null, shape.create(player.level));
+    public void setShape(ServerPlayerEntity player, EntityType<? extends LivingEntity> shape) {
+        MorphApi.getApiImpl().morphTo(player, MorphApi.getApiImpl().createVariant(shape.create(player.getServerWorld())));
     }
 
-    public void resetShape(ServerPlayer player) {
-        PlayerIdentity.updateIdentity(player, null, null);
+    public void resetShape(ServerPlayerEntity player) {
+        MorphApi.getApiImpl().demorph(player);
     }
 
     @Override
-    public LivingEntity getShape(Player player) {
-        return PlayerIdentity.getIdentity(player);
+    public LivingEntity getShape(PlayerEntity player) {
+        return MorphApi.getApiImpl().getActiveMorphEntity(player);
     }
 }
