@@ -28,7 +28,6 @@ public class Hemisphere {
         try {
             IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
             bus.addListener(this::commonSetup);
-            ToggleAnimationTypes.TYPES.register(bus);
         } catch (Exception e) {
             System.err.println("There was a problem!! : " + e.getMessage());
             throw e;
@@ -38,6 +37,7 @@ public class Hemisphere {
     private void commonSetup(final FMLCommonSetupEvent event) {
         if(ModList.get().isLoaded("morph")) {
             MorphMessages.registerMessages(CHANNEL);
+            ToggleAnimationTypes.init();
         }
     }
 

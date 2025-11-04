@@ -1,32 +1,21 @@
 package dev.hyperlynx.hemisphere.remorphed;
 
-import dev.hyperlynx.hemisphere.Hemisphere;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.RegistryBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MorphAnimations {
-    public static IForgeRegistry<MorphAnimation<?>> REGISTRY;
+    private static final Map<ResourceLocation, MorphAnimation<?>> ANIMATIONS = new HashMap<>();
 
-    public static DeferredRegister<MorphAnimation<?>> makeDeferredRegister(String mod_id) {
-        //noinspection unchecked
-        return DeferredRegister.create((Class<MorphAnimation<?>>)(Class<?>) MorphAnimation.class, mod_id);
+    public static void registerAnimation(ResourceLocation id, MorphAnimation<?> anim) {
+        ANIMATIONS.put(id, anim);
     }
 
-    @SubscribeEvent
-    public static void registerRegistry(RegistryEvent.NewRegistry event) {
-        // Super sketchy seeming cast that seems? to be fine?
-        //noinspection unchecked
-        REGISTRY = new RegistryBuilder<MorphAnimation<?>>().setType((Class<MorphAnimation<?>>)(Class<?>) MorphAnimation.class).setName(Hemisphere.location("morph_animations")).create();
+    public static MorphAnimation<?> get(ResourceLocation id) {
+        return ANIMATIONS.get(id);
     }
 
     protected static final Map<EntityType<?>, ResourceLocation> PUNCH_ANIMATION_BY_SHAPE = new HashMap<>();
