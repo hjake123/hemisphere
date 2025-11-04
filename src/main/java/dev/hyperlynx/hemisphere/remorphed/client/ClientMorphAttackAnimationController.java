@@ -13,7 +13,7 @@ public class ClientMorphAttackAnimationController {
 
     public static void addRunningAttack(MorphAnimating animating, MorphAnimation<?> anim) {
         if (!ATTACK_TIMERS.containsKey(animating)) {
-            ATTACK_TIMERS.put(animating, new Timer(anim.duration(), anim));
+            ATTACK_TIMERS.put(animating, new Timer(anim.duration, anim));
         }
     }
 
@@ -25,18 +25,24 @@ public class ClientMorphAttackAnimationController {
         List<MorphAnimating> finished = new ArrayList<>();
         for (MorphAnimating animating : ATTACK_TIMERS.keySet()) {
             Timer timer = ATTACK_TIMERS.get(animating);
-            int remaining_time = timer.time();
+            int remaining_time = timer.time;
             if (remaining_time <= 0) {
                 finished.add(animating);
             }
-            ATTACK_TIMERS.put(animating, new Timer(remaining_time - 1, timer.anim()));
+            ATTACK_TIMERS.put(animating, new Timer(remaining_time - 1, timer.anim));
         }
         for (MorphAnimating animating : finished) {
-            var timer = ATTACK_TIMERS.remove(animating);
-            animating.resetAnimation(timer.anim());
+            Timer timer = ATTACK_TIMERS.remove(animating);
+            animating.resetAnimation(timer.anim);
         }
     }
 
-    private record Timer(int time, MorphAnimation<?> anim) {
+    public static class Timer {
+        public Timer(int time, MorphAnimation<?> anim) {
+            this.time = time;
+            this.anim = anim;
+        }
+        public int time;
+        public MorphAnimation<?> anim;
     }
 }

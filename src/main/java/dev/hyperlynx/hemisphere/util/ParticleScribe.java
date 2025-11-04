@@ -1,24 +1,24 @@
 package dev.hyperlynx.hemisphere.util;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
+
+import net.minecraft.particles.IParticleData;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.World;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ParticleScribe {
-    public static void drawParticle(Level level, ParticleOptions opt, double x, double y, double z) {
-        if (level.isClientSide()) {
+    public static void drawParticle(World level, IParticleData opt, double x, double y, double z) {
+        if (level.isRemote) {
             level.addParticle(opt, x, y, z, 0, 0, 0);
         } else {
             ((ServerLevel) level).sendParticles(opt, x, y, z, 1, 0, 0, 0, 0.0);
         }
     }
 
-    public static void drawParticleBox(Level level, ParticleOptions opt, AABB aabb, int frequency) {
+    public static void drawParticleBox(World level, IParticleData opt, AxisAlignedBB aabb, int frequency) {
         double x, y, z;
         for(int i = 0; i < frequency; i++){
             x = level.random.nextDouble() * (aabb.maxX - aabb.minX) + aabb.minX;
@@ -28,16 +28,16 @@ public class ParticleScribe {
         }
     }
 
-    public static void drawParticleLine(Level level, ParticleOptions opt, BlockPos a, BlockPos b, int frequency, double noise){
+    public static void drawParticleLine(World level, IParticleData opt, BlockPos a, BlockPos b, int frequency, double noise){
         drawParticleLine(level, opt, a.getX()+0.5, a.getY()+0.5,a.getZ()+0.5,
                 b.getX()+0.5, b.getY()+0.5, b.getZ()+0.5, frequency, noise);
     }
 
-    public static void drawParticleLine(Level level, ParticleOptions opt, Vec3 a, Vec3 b, int frequency, double noise){
+    public static void drawParticleLine(World level, IParticleData opt, Vector3d a, Vector3d b, int frequency, double noise){
         drawParticleLine(level, opt, a.x, a.y,a.z, b.x, b.y, b.z, frequency, noise);
     }
 
-    public static void drawParticleLine(Level level, ParticleOptions opt, double x1, double y1, double z1, double x2, double y2, double z2, int frequency, double noise) {
+    public static void drawParticleLine(World level, IParticleData opt, double x1, double y1, double z1, double x2, double y2, double z2, int frequency, double noise) {
         for (int i = 0; i < frequency; i++) {
             double u = level.random.nextDouble();
             double x = (1 - u) * x1 + u * x2;
@@ -52,11 +52,11 @@ public class ParticleScribe {
         }
     }
 
-    public static void drawParticleZigZag(Level level, ParticleOptions opt, BlockPos a, BlockPos b, int frequency, int segments, double noise){
+    public static void drawParticleZigZag(World level, IParticleData opt, BlockPos a, BlockPos b, int frequency, int segments, double noise){
         drawParticleZigZag(level, opt, a.getX()+0.5, a.getY()+0.5, a.getZ()+0.5, b.getX()+0.5, b.getY()+0.5, b.getZ()+0.5, frequency, segments, noise);
     }
 
-    public static void drawParticleZigZag(Level level, ParticleOptions opt, double x1, double y1, double z1, double x2, double y2, double z2, int frequency, int segments, double noise){
+    public static void drawParticleZigZag(World level, IParticleData opt, double x1, double y1, double z1, double x2, double y2, double z2, int frequency, int segments, double noise){
         double prev_x = x1;
         double prev_y = y1;
         double prev_z = z1;
@@ -111,24 +111,24 @@ public class ParticleScribe {
         }
     }
 
-    public static void drawParticleRing(Level level, ParticleOptions opt, BlockPos pos, double height, double radius, int frequency){
+    public static void drawParticleRing(World level, IParticleData opt, BlockPos pos, double height, double radius, int frequency){
         drawExactParticleRing(level, opt, Vec3.atBottomCenterOf(pos), height, radius, frequency);
     }
 
-    public static void drawExactParticleRing(Level level, ParticleOptions opt, Vec3 pos, double height, double radius, int frequency){
+    public static void drawExactParticleRing(World level, IParticleData opt, Vector3d pos, double height, double radius, int frequency){
         for(int i = 0; i < frequency; i++){
             int deflection_angle = level.random.nextInt(1, 360);
             drawDeflectedParticle(level, opt, pos, height, radius, deflection_angle);
         }
     }
 
-    public static void drawDeflectedParticle(Level level, ParticleOptions opt, Vec3 pos, double height, double radius, int deflection_angle) {
+    public static void drawDeflectedParticle(World level, IParticleData opt, Vector3d pos, double height, double radius, int deflection_angle) {
         double x = Math.cos(Math.toRadians(deflection_angle)) * radius + pos.x;
         double z = Math.sin(Math.toRadians(deflection_angle)) * radius + pos.z;
         drawParticle(level, opt, x, pos.y + height, z);
     }
 
-    public static void drawParticleSphere(Level level, ParticleOptions opt, Vec3 pos, double radius, int frequency){
+    public static void drawParticleSphere(World level, IParticleData opt, Vector3d pos, double radius, int frequency){
         for(int i = 0; i < frequency; i++){
             double x = level.random.nextGaussian();
             double y = level.random.nextGaussian();
@@ -143,7 +143,7 @@ public class ParticleScribe {
         }
     }
 
-    public static void drawParticleStream(Level level, ParticleOptions opt, Vec3 start, Vec3 angle, int frequency){
+    public static void drawParticleStream(World level, IParticleData opt, Vector3d start, Vector3d angle, int frequency){
         angle.normalize();
         angle.multiply(0.0003, 0.0003, 0.0003);
         for(int i = 0; i < frequency; i++){

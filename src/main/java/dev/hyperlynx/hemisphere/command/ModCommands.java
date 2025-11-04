@@ -5,19 +5,14 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import dev.hyperlynx.hemisphere.Hemisphere;
 import dev.hyperlynx.hemisphere.util.Integration;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.Commands;
-import net.minecraft.commands.arguments.EntityArgument;
-import net.minecraft.commands.synchronization.ArgumentTypeInfo;
-import net.minecraft.commands.synchronization.ArgumentTypeInfos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.command.Commands;
+import net.minecraft.command.arguments.EntityArgument;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = Hemisphere.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModCommands {
@@ -51,13 +46,13 @@ public class ModCommands {
         event.getDispatcher().register(command_builder);
     }
 
-    private static int removeSkin(ServerPlayer target) {
+    private static int removeSkin(ServerPlayerEntity target) {
         Integration.morph().resetShape(target);
         Integration.reskin().resetSkin(target);
         return 1;
     }
 
-    public static int applySkin(String skin_name, ServerPlayer player) throws CommandSyntaxException {
+    public static int applySkin(String skin_name, ServerPlayerEntity player) throws CommandSyntaxException {
         if(!RoleSkins.SKINS.containsKey(skin_name)) {
             throw ERROR_INVALID_SKIN.create();
         }

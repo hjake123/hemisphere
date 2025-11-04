@@ -1,14 +1,14 @@
 package dev.hyperlynx.hemisphere.remorphed;
 
 import dev.hyperlynx.hemisphere.util.Integration;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Delayed;
 import java.util.function.BiConsumer;
 
 public class MorphAttackEffects {

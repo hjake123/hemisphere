@@ -1,25 +1,22 @@
 package dev.hyperlynx.hemisphere;
 
-import com.mojang.logging.LogUtils;
 import dev.hyperlynx.hemisphere.command.ModCommands;
 import dev.hyperlynx.hemisphere.remorphed.MorphAnimations;
 import dev.hyperlynx.hemisphere.remorphed.ToggleAnimationTypes;
 import dev.hyperlynx.hemisphere.remorphed.net.MorphMessages;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.simple.SimpleChannel;
-import org.slf4j.Logger;
+import net.minecraftforge.fml.network.NetworkRegistry;
+import net.minecraftforge.fml.network.simple.SimpleChannel;
+
 
 @Mod(Hemisphere.MODID)
 public class Hemisphere {
     public static final String MODID = "hemisphere";
-    public static final Logger LOGGER = LogUtils.getLogger();
-
     private static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             location("simple_channel"),

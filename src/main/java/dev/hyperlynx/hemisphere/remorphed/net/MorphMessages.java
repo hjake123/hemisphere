@@ -1,6 +1,6 @@
 package dev.hyperlynx.hemisphere.remorphed.net;
 
-import net.minecraftforge.network.simple.SimpleChannel;
+import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 public class MorphMessages {
     public static void registerMessages(SimpleChannel channel) {

@@ -1,23 +1,34 @@
 package dev.hyperlynx.hemisphere.remorphed.net;
 
 import dev.hyperlynx.hemisphere.remorphed.client.ClientMorphFunctions;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.network.NetworkEvent;
+
 
 import java.util.UUID;
 import java.util.function.Supplier;
 
 // TO CLIENT
-public record UntrackedMorphAnimationMessage(UUID player_id, ResourceLocation anim_id, boolean start) {
-    public void encoder(FriendlyByteBuf buf) {
-        buf.writeUUID(player_id);
+public class UntrackedMorphAnimationMessage{
+    final UUID player_id;
+    final ResourceLocation anim_id;
+    final boolean start;
+
+    public UntrackedMorphAnimationMessage(UUID playerId, ResourceLocation animId, boolean start) {
+        player_id = playerId;
+        anim_id = animId;
+        this.start = start;
+    }
+
+    public void encoder(PacketBuffer buf) {
+        buf.writeUniqueId(player_id);
         buf.writeResourceLocation(anim_id);
         buf.writeBoolean(start);
     }
 
-    public static UntrackedMorphAnimationMessage decoder(FriendlyByteBuf buf) {
-        return new UntrackedMorphAnimationMessage(buf.readUUID(), buf.readResourceLocation(), buf.readBoolean());
+    public static UntrackedMorphAnimationMessage decoder(PacketBuffer buf) {
+        return new UntrackedMorphAnimationMessage(buf.readUniqueId(), buf.readResourceLocation(), buf.readBoolean());
     }
 
     public void handler(Supplier<NetworkEvent.Context> context) {

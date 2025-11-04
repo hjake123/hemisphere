@@ -1,9 +1,6 @@
 package dev.hyperlynx.hemisphere.command;
 
 import com.google.gson.JsonObject;
-import net.minecraft.commands.CommandBuildContext;
-import net.minecraft.commands.synchronization.ArgumentTypeInfo;
-import net.minecraft.network.FriendlyByteBuf;
 
 public class SkinNameArgumentInfo implements ArgumentTypeInfo<SkinNameArgumentType, SkinNameArgumentInfo.Template> {
     @Override

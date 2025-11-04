@@ -3,10 +3,11 @@ package dev.hyperlynx.hemisphere.remorphed.client;
 import dev.hyperlynx.hemisphere.Hemisphere;
 import dev.hyperlynx.hemisphere.remorphed.*;
 import dev.hyperlynx.hemisphere.util.Integration;
+import me.ichun.mods.morph.common.Morph;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.UUID;
 import java.util.function.BiConsumer;
@@ -28,19 +29,19 @@ public class ClientMorphFunctions {
     }
 
     private static void updateAnimation(UUID player_id, ResourceLocation anim_id, BiConsumer<MorphAnimating, MorphAnimation<?>> update_function) {
-        assert Minecraft.getInstance().level != null;
-        Player player = Minecraft.getInstance().level.getPlayerByUUID(player_id);
+        assert Minecraft.getInstance().world != null;
+        PlayerEntity player = Minecraft.getInstance().world.getPlayerByUuid(player_id);
         if(player == null) {
             return;
         }
         LivingEntity identity = Integration.morph().getShape(player);
-        if(identity instanceof MorphAnimating animating) {
-            var animation = MorphAnimations.REGISTRY.get().getValue(anim_id);
+        if(identity instanceof MorphAnimating) {
+            MorphAnimation<?> animation = MorphAnimations.REGISTRY.get().getValue(anim_id);
             if(animation == null) {
                 Hemisphere.LOGGER.error("Invalid morph animation anim_id {}", anim_id);
                 return;
             }
-            update_function.accept(animating, animation);
+            update_function.accept((MorphAnimating) identity, animation);
         }
     }
 }

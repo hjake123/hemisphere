@@ -3,7 +3,6 @@ package dev.hyperlynx.hemisphere.util;
 import dev.hyperlynx.hemisphere.remorphed.MorphModWrapper;
 import dev.hyperlynx.hemisphere.remorphed.MorphModWrapperImpl;
 import dev.hyperlynx.hemisphere.reskin.ReSkinWrapper;
-import dev.hyperlynx.hemisphere.reskin.ReSkinWrapperImpl;
 import net.minecraftforge.fml.ModList;
 
 public class Integration {

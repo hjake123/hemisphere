@@ -29,11 +29,11 @@ public class ClientHandlers {
 
     @SubscribeEvent
     public static void onEmptyLeftClick(PlayerInteractEvent.LeftClickEmpty event) {
-        Hemisphere.CHANNEL.sendToServer(new EmptyLeftClickMessage(event.getEntity().getUUID()));
+        Hemisphere.CHANNEL.sendToServer(new EmptyLeftClickMessage(event.getEntity().getUniqueID()));
     }
 
     @SubscribeEvent
     public static void onEmptyRightClick(PlayerInteractEvent.RightClickEmpty event) {
-        Hemisphere.CHANNEL.sendToServer(new EmptyRightClickMessage(event.getEntity().getUUID()));
+        Hemisphere.CHANNEL.sendToServer(new EmptyRightClickMessage(event.getEntity().getUniqueID()));
     }
 }

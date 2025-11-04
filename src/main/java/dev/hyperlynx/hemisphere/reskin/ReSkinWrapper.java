@@ -1,22 +1,23 @@
 package dev.hyperlynx.hemisphere.reskin;
 
-import net.minecraft.world.entity.player.Player;
+
+import net.minecraft.entity.player.PlayerEntity;
 
 public interface ReSkinWrapper {
-    void resetSkin(Player player);
-    void setSkin(Player player, String url);
-    void setModel(Player player, boolean slim);
+    void resetSkin(PlayerEntity player);
+    void setSkin(PlayerEntity player, String url);
+    void setModel(PlayerEntity player, boolean slim);
 
     class Stub implements ReSkinWrapper {
-        public void resetSkin(Player player) {
+        public void resetSkin(PlayerEntity player) {
             // NOOP
         }
 
-        public void setSkin(Player player, String url) {
+        public void setSkin(PlayerEntity player, String url) {
             // NOOP
         }
 
-        public void setModel(Player player, boolean slim) {
+        public void setModel(PlayerEntity player, boolean slim) {
             // NOOP
         }
     }

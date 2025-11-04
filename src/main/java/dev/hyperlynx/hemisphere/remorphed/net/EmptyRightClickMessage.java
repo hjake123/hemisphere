@@ -1,20 +1,26 @@
 package dev.hyperlynx.hemisphere.remorphed.net;
 
 import dev.hyperlynx.hemisphere.remorphed.MorphAnimationController;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.UUID;
 import java.util.function.Supplier;
 
 // TO SERVER
-public record EmptyRightClickMessage(UUID player_id) {
-    public void encoder(FriendlyByteBuf buf) {
-        buf.writeUUID(player_id);
+public class EmptyRightClickMessage {
+    final UUID player_id;
+
+    public EmptyRightClickMessage(UUID playerId) {
+        player_id = playerId;
     }
 
-    public static EmptyRightClickMessage decoder(FriendlyByteBuf buf) {
-        return new EmptyRightClickMessage(buf.readUUID());
+    public void encoder(PacketBuffer buf) {
+        buf.writeUniqueId(player_id);
+    }
+
+    public static EmptyRightClickMessage decoder(PacketBuffer buf) {
+        return new EmptyRightClickMessage(buf.readUniqueId());
     }
 
     public void handler(Supplier<NetworkEvent.Context> context) {

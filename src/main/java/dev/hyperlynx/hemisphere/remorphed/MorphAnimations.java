@@ -1,9 +1,10 @@
 package dev.hyperlynx.hemisphere.remorphed;
 
 import dev.hyperlynx.hemisphere.Hemisphere;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.entity.EntityType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistryEntry;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 
@@ -12,8 +13,8 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class MorphAnimations {
-    public static final DeferredRegister<MorphAnimation<?>> ANIMATIONS = DeferredRegister.create(Hemisphere.location("morph_animations"), Hemisphere.MODID);
-    public static final Supplier<IForgeRegistry<MorphAnimation<?>>> REGISTRY = ANIMATIONS.makeRegistry(RegistryBuilder::new);
+    public static final DeferredRegister<ForgeRegistryEntry<MorphAnimation<?>>> ANIMATIONS = DeferredRegister.create(Hemisphere.location("morph_animations"), Hemisphere.MODID);
+    public static final Supplier<IForgeRegistry<ForgeRegistryEntry<MorphAnimation<?>>>> REGISTRY = ANIMATIONS.makeRegistry(RegistryBuilder::new);
 
     public static DeferredRegister<MorphAnimation<?>> makeDeferredRegister(String mod_id) {
         return DeferredRegister.create(Hemisphere.location("morph_animations"), mod_id);

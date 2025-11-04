@@ -7,6 +7,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
+import org.apache.logging.log4j.Level;
 
 import java.util.function.Supplier;
 
@@ -22,7 +23,7 @@ public class ToggleAnimationTypes {
         for(ResourceLocation toggle_type_id : ToggleAnimationTypes.REGISTRY.get().getKeys()) {
             ToggleAnimationType toggle_type = ToggleAnimationTypes.REGISTRY.get().getValue(toggle_type_id);
             if(toggle_type == null) {
-                Hemisphere.LOGGER.error("Unregistered toggle type {}", toggle_type_id);
+                Hemisphere.LOGGER.log(Level.ERROR, "Unregistered toggle type " + toggle_type_id);
                 return;
             }
             toggle_type.tick(player);
