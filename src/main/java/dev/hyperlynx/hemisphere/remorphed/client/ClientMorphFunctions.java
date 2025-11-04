@@ -36,7 +36,7 @@ public class ClientMorphFunctions {
         }
         LivingEntity identity = Integration.morph().getShape(player);
         if(identity instanceof MorphAnimating) {
-            MorphAnimation<?> animation = MorphAnimations.REGISTRY.get().getValue(anim_id);
+            MorphAnimation<?> animation = MorphAnimations.REGISTRY.getValue(anim_id);
             if(animation == null) {
                 System.out.println("[ERROR] [Hemisphere] Invalid morph animation anim_id " + anim_id);
                 return;

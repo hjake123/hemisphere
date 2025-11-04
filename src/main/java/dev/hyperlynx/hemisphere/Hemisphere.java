@@ -24,15 +24,19 @@ public class Hemisphere {
             PROTOCOL_VERSION::equals
     );
 
-    public Hemisphere(FMLJavaModLoadingContext context) {
-        IEventBus bus = context.getModEventBus();
-        bus.addListener(this::commonSetup);
-        MorphAnimations.ANIMATIONS.register(bus);
-        ToggleAnimationTypes.TYPES.register(bus);
+    public Hemisphere() {
+        try {
+            IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+            bus.addListener(this::commonSetup);
+            ToggleAnimationTypes.TYPES.register(bus);
+        } catch (Exception e) {
+            System.err.println("There was a problem!! : " + e.getMessage());
+            throw e;
+        }
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        if(ModList.get().isLoaded("identity")) {
+        if(ModList.get().isLoaded("morph")) {
             MorphMessages.registerMessages(CHANNEL);
         }
     }

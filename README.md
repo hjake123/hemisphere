@@ -1,5 +1,6 @@
 # Hemisphere
-This is a library mod made for use in commissions to integrate GeckoLib animations with Walkers, among other repeated tasks.
+This is a library mod made for use in commissions to integrate GeckoLib animations with Morph, among other repeated tasks.
+It has been hastily backported to 1.16.5, I don't recommend using this version!
 
 # Setup
 This mod can be built using gradle, and is intended to be used with the JarJar dependency system.
