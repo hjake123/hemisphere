@@ -13,36 +13,36 @@ public class MorphHandlers {
 
     @SubscribeEvent
     public static void onBlockLeftClick(PlayerInteractEvent.LeftClickBlock event) {
-        MorphAnimationController.handleLeftClick(event.getLevel(), event.getEntity());
+        MorphAnimationController.handleLeftClick(event.getWorld(), event.getPlayer());
     }
 
     @SubscribeEvent
     public static void onEntityHit(AttackEntityEvent event) {
-        MorphAnimationController.handleLeftClick(event.getEntity().level, event.getEntity());
+        MorphAnimationController.handleLeftClick(event.getEntity().getEntityWorld(), event.getPlayer());
     }
 
     @SubscribeEvent
     public static void onPlayerRightClickEntity(PlayerInteractEvent.EntityInteract event) {
-        if(event.getLevel().isClientSide()) {
+        if(event.getWorld().isRemote()) {
             return;
         }
-        MorphAnimationController.handleRightClick(event.getLevel(), event.getEntity());
+        MorphAnimationController.handleRightClick(event.getWorld(), event.getPlayer());
     }
 
     @SubscribeEvent
     public static void onPlayerRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        if(event.getLevel().isClientSide()) {
+        if(event.getWorld().isRemote) {
             return;
         }
-        MorphAnimationController.handleRightClick(event.getLevel(), event.getEntity());
+        MorphAnimationController.handleRightClick(event.getWorld(), event.getPlayer());
     }
 
     @SubscribeEvent
     public static void onPlayerRightClickWithItem(PlayerInteractEvent.RightClickItem event) {
-        if(event.getLevel().isClientSide()) {
+        if(event.getWorld().isRemote) {
             return;
         }
-        MorphAnimationController.handleRightClick(event.getLevel(), event.getEntity());
+        MorphAnimationController.handleRightClick(event.getWorld(), event.getPlayer());
     }
 
     @SubscribeEvent
@@ -59,8 +59,8 @@ public class MorphHandlers {
 
     @SubscribeEvent
     public static void onPlayerJump(LivingEvent.LivingJumpEvent event) {
-        if(event.getEntity() instanceof ServerPlayerEntity splayer) {
-            MorphAnimationController.handleJump(splayer);
+        if(event.getEntity() instanceof ServerPlayerEntity) {
+            MorphAnimationController.handleJump((ServerPlayerEntity) event.getEntity());
         }
     }
 }

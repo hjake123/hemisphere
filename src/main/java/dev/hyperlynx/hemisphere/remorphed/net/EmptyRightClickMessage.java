@@ -24,7 +24,7 @@ public class EmptyRightClickMessage {
     }
 
     public void handler(Supplier<NetworkEvent.Context> context) {
-        context.get().enqueueWork(() -> MorphAnimationController.handleRightClick(context.get().getSender().level, context.get().getSender()));
+        context.get().enqueueWork(() -> MorphAnimationController.handleRightClick(context.get().getSender().world, context.get().getSender()));
         context.get().setPacketHandled(true);
     }
 

@@ -1,6 +1,5 @@
 package dev.hyperlynx.hemisphere;
 
-import dev.hyperlynx.hemisphere.command.ModCommands;
 import dev.hyperlynx.hemisphere.remorphed.MorphAnimations;
 import dev.hyperlynx.hemisphere.remorphed.ToggleAnimationTypes;
 import dev.hyperlynx.hemisphere.remorphed.net.MorphMessages;
@@ -29,7 +28,6 @@ public class Hemisphere {
         IEventBus bus = context.getModEventBus();
         bus.addListener(this::commonSetup);
         MorphAnimations.ANIMATIONS.register(bus);
-        ModCommands.COMMAND_ARGUMENTS.register(bus);
         ToggleAnimationTypes.TYPES.register(bus);
     }
 
@@ -39,7 +37,6 @@ public class Hemisphere {
         }
     }
 
-    @SuppressWarnings("removal")
     public static ResourceLocation location(String path) {
         return new ResourceLocation(MODID, path);
     }

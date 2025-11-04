@@ -38,7 +38,7 @@ public class ClientMorphFunctions {
         if(identity instanceof MorphAnimating) {
             MorphAnimation<?> animation = MorphAnimations.REGISTRY.get().getValue(anim_id);
             if(animation == null) {
-                Hemisphere.LOGGER.error("Invalid morph animation anim_id {}", anim_id);
+                System.out.println("[ERROR] [Hemisphere] Invalid morph animation anim_id " + anim_id);
                 return;
             }
             update_function.accept((MorphAnimating) identity, animation);

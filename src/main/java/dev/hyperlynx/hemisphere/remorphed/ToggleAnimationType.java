@@ -3,13 +3,15 @@ package dev.hyperlynx.hemisphere.remorphed;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.function.Function;
 
-public class ToggleAnimationType {
+public class ToggleAnimationType implements IForgeRegistryEntry<ToggleAnimationType> {
     private final Map<UUID, Boolean> toggle_states = new HashMap<>();
     private final Map<EntityType<?>, ResourceLocation> animation_by_shape = new HashMap<>();
     private final Function<PlayerEntity, Boolean> check_function;
@@ -24,5 +26,21 @@ public class ToggleAnimationType {
 
     public void tick(PlayerEntity player) {
         MorphAnimationController.updateToggleState(toggle_states, animation_by_shape::get, player, check_function.apply(player));
+    }
+
+    @Override
+    public ToggleAnimationType setRegistryName(ResourceLocation name) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public ResourceLocation getRegistryName() {
+        return null;
+    }
+
+    @Override
+    public Class<ToggleAnimationType> getRegistryType() {
+        return null;
     }
 }

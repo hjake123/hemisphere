@@ -33,7 +33,7 @@ public class MorphAnimationController {
         if(punch_anim_id == null) {
             return;
         }
-        Hemisphere.CHANNEL.send(PacketDistributor.ALL.noArg(), new MorphAttackMessage(attacker.getUUID(), punch_anim_id));
+        Hemisphere.CHANNEL.send(PacketDistributor.ALL.noArg(), new MorphAttackMessage(attacker.getUniqueID(), punch_anim_id));
     }
 
     public static void handleRightClick(World level, PlayerEntity attacker) {
@@ -49,7 +49,7 @@ public class MorphAnimationController {
         if(interact_anim_id == null) {
             return;
         }
-        Hemisphere.CHANNEL.send(PacketDistributor.ALL.noArg(), new MorphAttackMessage(attacker.getUUID(), interact_anim_id));
+        Hemisphere.CHANNEL.send(PacketDistributor.ALL.noArg(), new MorphAttackMessage(attacker.getUniqueID(), interact_anim_id));
     }
 
     public static void updateToggleState(Map<UUID, Boolean> state_map, Function<EntityType<?>, ResourceLocation> transition_lookup, PlayerEntity player, boolean should_run) {
@@ -82,6 +82,6 @@ public class MorphAnimationController {
         if(jump_anim_id == null) {
             return;
         }
-        Hemisphere.CHANNEL.send(PacketDistributor.ALL.noArg(), new MorphAttackMessage(player.getUUID(), jump_anim_id));
+        Hemisphere.CHANNEL.send(PacketDistributor.ALL.noArg(), new MorphAttackMessage(player.getUniqueID(), jump_anim_id));
     }
 }

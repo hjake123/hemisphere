@@ -1,6 +1,7 @@
 package dev.hyperlynx.hemisphere.keybind;
 
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,9 +23,9 @@ public class KeyBind {
         return this;
     }
 
-    public static void registerKeyMappings(RegisterKeyMappingsEvent event, String mod_id) {
+    public static void registerKeyMappings(String mod_id) {
         for(KeyBind binding : BINDINGS.get(mod_id)) {
-            event.register(binding.mapping().get());
+            ClientRegistry.registerKeyBinding(binding.key.get());
         }
     }
 }

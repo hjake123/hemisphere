@@ -13,11 +13,11 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class MorphAnimations {
-    public static final DeferredRegister<ForgeRegistryEntry<MorphAnimation<?>>> ANIMATIONS = DeferredRegister.create(Hemisphere.location("morph_animations"), Hemisphere.MODID);
-    public static final Supplier<IForgeRegistry<ForgeRegistryEntry<MorphAnimation<?>>>> REGISTRY = ANIMATIONS.makeRegistry(RegistryBuilder::new);
+    public static final DeferredRegister<MorphAnimation<?>> ANIMATIONS = DeferredRegister.create((Class<MorphAnimation<?>>)(Class<?>)MorphAnimation.class, Hemisphere.MODID);
+    public static final Supplier<IForgeRegistry<MorphAnimation<?>>> REGISTRY = ANIMATIONS.makeRegistry("morph_animations", RegistryBuilder::new);
 
     public static DeferredRegister<MorphAnimation<?>> makeDeferredRegister(String mod_id) {
-        return DeferredRegister.create(Hemisphere.location("morph_animations"), mod_id);
+        return DeferredRegister.create(REGISTRY.get(), mod_id);
     }
 
     protected static final Map<EntityType<?>, ResourceLocation> PUNCH_ANIMATION_BY_SHAPE = new HashMap<>();

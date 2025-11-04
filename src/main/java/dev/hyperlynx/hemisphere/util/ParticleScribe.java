@@ -6,6 +6,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -14,16 +15,16 @@ public class ParticleScribe {
         if (level.isRemote) {
             level.addParticle(opt, x, y, z, 0, 0, 0);
         } else {
-            ((ServerLevel) level).sendParticles(opt, x, y, z, 1, 0, 0, 0, 0.0);
+            ((ServerWorld) level).spawnParticle(opt, x, y, z, 1, 0, 0, 0, 0.0);
         }
     }
 
     public static void drawParticleBox(World level, IParticleData opt, AxisAlignedBB aabb, int frequency) {
         double x, y, z;
         for(int i = 0; i < frequency; i++){
-            x = level.random.nextDouble() * (aabb.maxX - aabb.minX) + aabb.minX;
-            y = level.random.nextDouble() * (aabb.maxY - aabb.minY) + aabb.minY;
-            z = level.random.nextDouble() * (aabb.maxZ - aabb.minZ) + aabb.minZ;
+            x = level.getRandom().nextDouble() * (aabb.maxX - aabb.minX) + aabb.minX;
+            y = level.getRandom().nextDouble() * (aabb.maxY - aabb.minY) + aabb.minY;
+            z = level.getRandom().nextDouble() * (aabb.maxZ - aabb.minZ) + aabb.minZ;
             drawParticle(level, opt, x, y, z);
         }
     }
@@ -39,14 +40,14 @@ public class ParticleScribe {
 
     public static void drawParticleLine(World level, IParticleData opt, double x1, double y1, double z1, double x2, double y2, double z2, int frequency, double noise) {
         for (int i = 0; i < frequency; i++) {
-            double u = level.random.nextDouble();
+            double u = level.getRandom().nextDouble();
             double x = (1 - u) * x1 + u * x2;
             double y = (1 - u) * y1 + u * y2;
             double z = (1 - u) * z1 + u * z2;
 
-            x += (level.random.nextFloat() - 0.5) * noise;
-            y += (level.random.nextFloat() - 0.5) * noise;
-            z += (level.random.nextFloat() - 0.5) * noise;
+            x += (level.getRandom().nextFloat() - 0.5) * noise;
+            y += (level.getRandom().nextFloat() - 0.5) * noise;
+            z += (level.getRandom().nextFloat() - 0.5) * noise;
 
             drawParticle(level, opt, x, y, z);
         }
@@ -99,9 +100,9 @@ public class ParticleScribe {
                 else
                     next_z = z2 < prev_z ? prev_z - z_dist : prev_z + z_dist;
 
-                next_x += (level.random.nextFloat()-0.5) * noise;
-                next_y += (level.random.nextFloat()-0.5) * noise;
-                next_z += (level.random.nextFloat()-0.5) * noise;
+                next_x += (level.getRandom().nextFloat()-0.5) * noise;
+                next_y += (level.getRandom().nextFloat()-0.5) * noise;
+                next_z += (level.getRandom().nextFloat()-0.5) * noise;
             }
             drawParticleLine(level, opt, prev_x, prev_y, prev_z, next_x, next_y, next_z, frequency, 0);
 
@@ -112,12 +113,12 @@ public class ParticleScribe {
     }
 
     public static void drawParticleRing(World level, IParticleData opt, BlockPos pos, double height, double radius, int frequency){
-        drawExactParticleRing(level, opt, Vec3.atBottomCenterOf(pos), height, radius, frequency);
+        drawExactParticleRing(level, opt, Vector3d.copyCenteredHorizontally(pos), height, radius, frequency);
     }
 
     public static void drawExactParticleRing(World level, IParticleData opt, Vector3d pos, double height, double radius, int frequency){
         for(int i = 0; i < frequency; i++){
-            int deflection_angle = level.random.nextInt(1, 360);
+            int deflection_angle = level.getRandom().nextInt(360);
             drawDeflectedParticle(level, opt, pos, height, radius, deflection_angle);
         }
     }
@@ -130,9 +131,9 @@ public class ParticleScribe {
 
     public static void drawParticleSphere(World level, IParticleData opt, Vector3d pos, double radius, int frequency){
         for(int i = 0; i < frequency; i++){
-            double x = level.random.nextGaussian();
-            double y = level.random.nextGaussian();
-            double z = level.random.nextGaussian();
+            double x = level.getRandom().nextGaussian();
+            double y = level.getRandom().nextGaussian();
+            double z = level.getRandom().nextGaussian();
             double normalizer = 1 / Math.sqrt(x * x + y * y + z * z);
 
             x = x * normalizer * radius;
@@ -140,14 +141,6 @@ public class ParticleScribe {
             z = z * normalizer * radius;
 
             drawParticle(level, opt, pos.x + x, pos.y + y, pos.z + z);
-        }
-    }
-
-    public static void drawParticleStream(World level, IParticleData opt, Vector3d start, Vector3d angle, int frequency){
-        angle.normalize();
-        angle.multiply(0.0003, 0.0003, 0.0003);
-        for(int i = 0; i < frequency; i++){
-            level.addParticle(opt, start.x, start.y, start.z, angle.x, angle.y, angle.z);
         }
     }
 }

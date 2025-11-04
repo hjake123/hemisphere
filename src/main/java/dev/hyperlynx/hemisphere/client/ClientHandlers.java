@@ -19,7 +19,7 @@ public class ClientHandlers {
             ClientMorphAttackAnimationController.tick();
             for(String mod_id : KeyBind.BINDINGS.keySet()) {
                 for(KeyBind binding : KeyBind.BINDINGS.get(mod_id)) {
-                    while(binding.key.get().consumeClick()) {
+                    while(binding.key.get().isPressed()) {
                         binding.handler.run();
                     }
                 }

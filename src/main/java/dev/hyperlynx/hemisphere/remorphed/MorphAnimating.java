@@ -1,11 +1,11 @@
 package dev.hyperlynx.hemisphere.remorphed;
 
-@SuppressWarnings({"unchecked", "rawtypes"})
+@SuppressWarnings({"rawtypes"})
 public interface MorphAnimating {
     default void startAnimation(MorphAnimation anim) {
-        anim.run_function().accept(this);
+        anim.run_function.accept(this);
     }
     default void resetAnimation(MorphAnimation anim) {
-        anim.reset_function().accept(this);
+        anim.reset_function.accept(this);
     }
 }
