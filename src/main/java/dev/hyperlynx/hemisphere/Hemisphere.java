@@ -25,13 +25,8 @@ public class Hemisphere {
     );
 
     public Hemisphere() {
-        try {
-            IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-            bus.addListener(this::commonSetup);
-        } catch (Exception e) {
-            System.err.println("There was a problem!! : " + e.getMessage());
-            throw e;
-        }
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        bus.addListener(this::commonSetup);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
