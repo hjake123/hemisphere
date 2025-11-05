@@ -34,14 +34,18 @@ public class MorphAnimations {
     }
 
     public static void registerCrouchAnimation(EntityType<?> entity, ResourceLocation anim_id) {
-        ToggleAnimationTypes.SHIFT.get().registerAnimation(entity, anim_id);
+        ToggleAnimationTypes.SHIFT.registerAnimation(entity, anim_id);
     }
 
     public static void registerSwimAnimation(EntityType<?> entity, ResourceLocation anim_id) {
-        ToggleAnimationTypes.SWIMMING.get().registerAnimation(entity, anim_id);
+        ToggleAnimationTypes.SWIMMING.registerAnimation(entity, anim_id);
     }
 
     public static void registerFlyingAnimation(EntityType<?> entity, ResourceLocation anim_id) {
-        ToggleAnimationTypes.FLYING.get().registerAnimation(entity, anim_id);
+        ToggleAnimationTypes.FLYING.registerAnimation(entity, anim_id);
+    }
+
+    public static void registerSprintAnimation(EntityType<?> entity, ResourceLocation anim_id) {
+        ToggleAnimationTypes.SPRINT.registerAnimation(entity, anim_id);
     }
 }

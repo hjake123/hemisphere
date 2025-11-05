@@ -11,8 +11,13 @@ import java.util.function.Consumer;
  * Should be registered to "hemisphere:morph_animations".
  */
 public class MorphAnimation<T extends MorphAnimating> extends ForgeRegistryEntry<MorphAnimation<?>> {
-    private ResourceLocation location;
-    public int duration;
-    public Consumer<T> run_function;
-    public Consumer<T> reset_function;
+    public final int duration;
+    public final Consumer<T> run_function;
+    public final Consumer<T> reset_function;
+
+    public MorphAnimation(int duration, Consumer<T> runFunction, Consumer<T> resetFunction) {
+        this.duration = duration;
+        run_function = runFunction;
+        reset_function = resetFunction;
+    }
 }

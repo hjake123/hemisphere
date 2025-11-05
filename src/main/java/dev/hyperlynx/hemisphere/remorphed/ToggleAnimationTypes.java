@@ -1,6 +1,7 @@
 package dev.hyperlynx.hemisphere.remorphed;
 
 import dev.hyperlynx.hemisphere.Hemisphere;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -38,12 +39,14 @@ public class ToggleAnimationTypes {
     }
 
     public static void init() {
-        registerType("shift", new ToggleAnimationType(PlayerEntity::isCrouching));
-        registerType("swimming", new ToggleAnimationType(PlayerEntity::isVisuallySwimming));
-        registerType("flying", new ToggleAnimationType(player -> player.abilities.isFlying));
+        registerType("shift", SHIFT);
+        registerType("swimming", SWIMMING);
+        registerType("flying", FLYING);
+        registerType("spring", SPRINT);
     }
 
-    public static final Supplier<ToggleAnimationType> SHIFT = () -> TYPES.get(Hemisphere.location("shift"));
-    public static final Supplier<ToggleAnimationType> SWIMMING = () -> TYPES.get(Hemisphere.location("swimming"));
-    public static final Supplier<ToggleAnimationType> FLYING = () -> TYPES.get(Hemisphere.location("flying"));
+    public static final ToggleAnimationType SHIFT = new ToggleAnimationType(PlayerEntity::isCrouching);
+    public static final ToggleAnimationType SWIMMING = new ToggleAnimationType(PlayerEntity::isVisuallySwimming);
+    public static final ToggleAnimationType FLYING = new ToggleAnimationType(player -> player.abilities.isFlying);
+    public static final ToggleAnimationType SPRINT = new ToggleAnimationType(Entity::isSprinting);
 }

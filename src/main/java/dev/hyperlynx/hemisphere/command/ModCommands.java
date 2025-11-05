@@ -21,7 +21,11 @@ public class ModCommands {
 
     @SubscribeEvent
     public static void register(RegisterCommandsEvent event) {
-        ArgumentTypes.register("hemisphere:skin_name", SkinNameArgument.class, new SkinNameArgument.Serializer());
+        try {
+            ArgumentTypes.register("hemisphere:skin_name", SkinNameArgument.class, new SkinNameArgument.Serializer());
+        } catch (IllegalArgumentException exception) {
+            // No-op
+        }
         if(RoleSkins.SKINS.isEmpty()) {
             return;
         }
