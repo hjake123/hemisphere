@@ -30,7 +30,7 @@ public class Hemisphere {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        if(ModList.get().isLoaded("morph")) {
+        if(ModList.get().isLoaded("morph") || ModList.get().isLoaded("moreplayermodels")) {
             MorphMessages.registerMessages(CHANNEL);
             ToggleAnimationTypes.init();
         }

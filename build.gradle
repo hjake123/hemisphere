@@ -12,7 +12,6 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1165.2.4'
 group = 'dev.hyperlynx' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'hemisphere'
 
@@ -21,6 +20,9 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships Java 
 repositories {
     maven {
         url "https://cursemaven.com"
+    }
+    flatDir {
+        dirs 'libs'
     }
 }
 
@@ -128,6 +130,8 @@ dependencies {
 
     compileOnly fg.deobf("curse.maven:ichunutil-229060:4397363")
     compileOnly fg.deobf("curse.maven:morph-229080:4397367")
+
+    implementation fg.deobf('libs.mpm:MorePlayerModels:1.16.5.20220731') // Use a valid GAV coordinate
 
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"
