@@ -20,7 +20,7 @@ license="MIT"
 # The modid of the mod
 modId="hemisphere" #mandatory
 # The version number of the mod
-version="1165.2.4" #mandatory
+version="1165.2.5.1" #mandatory
 # A display name for the mod
 displayName="Hemisphere" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification https://docs.minecraftforge.net/en/latest/misc/updatechecker/
