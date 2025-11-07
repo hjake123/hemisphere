@@ -46,7 +46,7 @@ public class ToggleAnimationTypes {
     }
 
     public static final ToggleAnimationType SHIFT = new ToggleAnimationType(PlayerEntity::isCrouching);
-    public static final ToggleAnimationType SWIMMING = new ToggleAnimationType(PlayerEntity::isVisuallySwimming);
+    public static final ToggleAnimationType SWIMMING = new ToggleAnimationType(PlayerEntity::isSwimming);
     public static final ToggleAnimationType FLYING = new ToggleAnimationType(player -> player.abilities.isFlying);
     public static final ToggleAnimationType SPRINT = new ToggleAnimationType(Entity::isSprinting);
 }
